@@ -130,8 +130,22 @@ async function idTemiEsclusi(tok) {
   if (!righe.length) console.warn("ATTENZIONE: tema \"Erotic\" non trovato su IGDB, nessun titolo escluso.");
   return new Set(righe.map((r) => r.id));
 }
-const escluso = (gioco, temi) =>
-  temi.size > 0 && (gioco?.themes || []).some((t) => temi.has(typeof t === "object" ? t.id : t));
+/* Il tema "Erotic" non basta: su IGDB e' la comunita' a metterlo, e certi titoli
+   espliciti non ce l'hanno. Per quelli c'e' una lista fissa di id IGDB, piu' un
+   controllo sul titolo per le parole che non lasciano dubbi. Per aggiungerne uno:
+   l'id e' il numero "igdb" in data.json. Quando il sito avra' la registrazione,
+   la scelta passera' all'utente maggiorenne; per ora restano fuori per tutti. */
+const ESCLUSI_A_MANO = new Set([
+  404219, // Imouto Paradise! 3
+  407358, // Imouto Paradise! 2
+  418997, // Imouto Choukyou Nikki
+]);
+const TITOLO_ESPLICITO = /\b(hentai|nsfw|ecchi|porn\w*|r-?18|18\+)(?=\W|$)/i;
+const escluso = (gioco, temi) => {
+  if (!ESCLUDI_EROTICI || !gioco) return false;
+  if (ESCLUSI_A_MANO.has(gioco.id) || TITOLO_ESPLICITO.test(gioco.name || "")) return true;
+  return temi.size > 0 && (gioco.themes || []).some((t) => temi.has(typeof t === "object" ? t.id : t));
+};
 
 /* ------------------------------------------------------- trasformazione */
 
