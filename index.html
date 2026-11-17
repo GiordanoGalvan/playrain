@@ -1,4 +1,4 @@
-<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><title>Playrain</title><meta name="description" content="Playrain: il calendario delle uscite dei videogiochi per PC, Switch 2, PS5 e Xbox, con slittamenti, classifiche e titoli che si fanno notare."><meta name="theme-color" content="#1f2930"><link rel="icon" href="icons/icon.svg?v=2" type="image/svg+xml"><link rel="icon" href="icons/icon-32.png?v=2" sizes="32x32" type="image/png"><link rel="apple-touch-icon" href="icons/icon-180.png?v=2"><link rel="manifest" href="manifest.webmanifest?v=2"><style>:root{color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#1f2930;color:#f1ede5}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><title>Playrain</title><meta name="description" content="Playrain: il calendario delle uscite dei videogiochi per PC, Switch 2, PS5 e Xbox, con slittamenti, classifiche e titoli che si fanno notare."><meta name="theme-color" content="#1f2930"><link rel="icon" href="icons/icon.svg?v=3" type="image/svg+xml"><link rel="icon" href="icons/icon-32.png?v=3" sizes="32x32" type="image/png"><link rel="apple-touch-icon" href="icons/icon-180.png?v=3"><link rel="manifest" href="manifest.webmanifest?v=3"><style>:root{color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#1f2930;color:#f1ede5}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
 <style>
 /* Font ospitati dal sito stesso. Prima arrivavano da fonts.googleapis.com: ogni
    visitatore mandava il proprio indirizzo IP a Google senza averlo scelto, ed e'
@@ -106,8 +106,8 @@ a.lk{color:var(--ink2)}
    — vecchi browser, modalita' a contrasto forzato — resta quello, e la parola si
    legge comunque. */
 .brand-txt{font-family:var(--f-ser);font-weight:800;font-size:27px;line-height:1;letter-spacing:-.03em;
-  color:var(--amber-sol);
-  background-image:linear-gradient(96deg,#ff2d00 0%,#ff6a00 34%,#ffa417 66%,var(--amber-sol) 100%);
+  color:#4fe6c4;
+  background-image:linear-gradient(100deg,#7ff0d0 0%,#4fd8d0 40%,#5aa8ff 78%,#6a6bff 100%);
   -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 @media (forced-colors:active){.brand-txt{-webkit-text-fill-color:currentColor;background-image:none}}
 /* Il marchio e' la goccia a barre piene: una silhouette di goccia riempita da
@@ -215,6 +215,7 @@ a.lk{color:var(--ink2)}
   margin:-9px -8px 3px;padding:5px 8px;background:var(--surf2)}
 .cell.today .dnum{color:var(--amber-sol)}
 .cell.today .dnum::after{content:"oggi";font-size:9px;letter-spacing:.1em;text-transform:uppercase}
+html[lang="en"] .cell.today .dnum::after{content:"today"}
 /* Il conteggio sta in basso a destra in posizione assoluta, e i titoli ci
    finivano sotto. La cella riserva una striscia in fondo e l'elenco dei titoli
    si taglia al proprio bordo: quello che non ci sta sparisce invece di
@@ -579,7 +580,6 @@ a.gcard:hover{background:var(--surf2);border-color:var(--line3)}
   animation:skyIn .9s ease-out both}
 @keyframes skyIn{from{opacity:0}to{opacity:1}}
 @media (prefers-reduced-motion:reduce){.sky{animation:none}}
-.wrap{z-index:1}
 .foot::before{content:"";position:absolute;left:0;right:0;top:-60px;bottom:-56px;z-index:-1;
   pointer-events:none;opacity:.55;
   background:
@@ -605,16 +605,7 @@ a.gcard:hover{background:var(--surf2);border-color:var(--line3)}
 <div class="bar">
   <div class="bar-in">
     <div class="brand">
-      <svg class="brand-mark" viewBox="0 0 120 120" aria-hidden="true">
-        <defs><clipPath id="prdrop"><path d="M60 14C60 14 98 56 98 78A38 38 0 0 1 22 78C22 56 60 14 60 14Z"/></clipPath></defs>
-        <g clip-path="url(#prdrop)">
-          <rect x="22" y="0" width="13" height="120" fill="#ffc861"/>
-          <rect x="38" y="0" width="13" height="120" fill="#ff6a00"/>
-          <rect x="54" y="0" width="13" height="120" fill="#ffa417"/>
-          <rect x="70" y="0" width="13" height="120" fill="#ff2d00"/>
-          <rect x="86" y="0" width="13" height="120" fill="#ff8a1a"/>
-        </g>
-      </svg>
+      <svg class="brand-mark" viewBox="8 1 48 80" aria-hidden="true"><defs><linearGradient id="prg" x1=".25" y1="0" x2=".75" y2="1"><stop offset="0" stop-color="#b8ffe9"/><stop offset=".35" stop-color="#4fe6c4"/><stop offset=".72" stop-color="#38a8ff"/><stop offset="1" stop-color="#7457ff"/></linearGradient></defs><path d="M36 3C27 19 10 35 10 58a22 22 0 0 0 44 0c0-12-6-20-10-28-1 6-3 10-6 12 2-12 2-26-2-39Z" fill="url(#prg)"/><path d="M26 48v20l16.5-10z" style="fill:var(--bg)"/></svg>
       <span class="brand-txt">Playrain</span>
     </div>
     <div class="bar-sp"></div>
@@ -636,6 +627,7 @@ a.gcard:hover{background:var(--surf2);border-color:var(--line3)}
         <button type="button" data-m="two" aria-pressed="false">3 · 37</button>
       </div>
     </div>
+    <button type="button" class="pf-b notch-s" id="langbtn" lang="en">EN</button>
   </div>
 </div>
 
@@ -748,12 +740,109 @@ a.gcard:hover{background:var(--surf2);border-color:var(--line3)}
 <div class="sweep" aria-hidden="true"></div>
 
 <script>
+/* ---------------- lingua ----------------
+   Una pagina sola per due lingue. Si parte da quella del browser; il pulsante
+   IT/EN la cambia e la scelta resta salvata in questo browser. I testi della
+   pagina sono scritti in italiano: qui c'e' solo la loro traduzione, cosi' chi
+   modifica un testo italiano vede subito che manca la riga inglese (resta in
+   italiano invece di rompersi). */
+(function(){
+var L="it";
+try{L=localStorage.getItem("playrain-lang")||"";}catch(e){}
+if(L!=="it"&&L!=="en")L=/^it\b/i.test(navigator.language||"")?"it":"en";
+window.LANG=L;
+document.documentElement.lang=L;
+var EN={
+"Cerca un gioco per titolo":"Search a game by title","cerca un titolo…":"search a title…",
+"Risultati":"Results","Filtro piattaforme":"Platform filter","Genere":"Genre","tutti":"all",
+"Stile badge":"Badge style","Mese precedente":"Previous month","Mese successivo":"Next month",
+"Uscite del giorno":"Releases of the day","Chiudi pannello":"Close panel",
+"I MIGLIORI":"THE BEST","usciti":"released","Periodo":"Period","Periodo classifica":"Ranking period",
+"Settimana":"Week","Mese":"Month","Anno":"Year","ogni console":"every console",
+"Mostra tutti e 50":"Show all 50",
+"I titoli col voto stampa più alto di sempre, su qualsiasi console.":"The highest press-rated games of all time, on any console.",
+"SEGNALATI":"RISING","extra-calendario":"off-calendar","Finestra":"Window","Finestra di crescita":"Growth window",
+"7 gg":"7 d","14 gg":"14 d",
+"Giochi usciti negli ultimi quattro mesi che si stanno facendo notare: è il posto dove un titolo sconosciuto viene a galla. Contano solo i movimenti netti — passare da una a quattro visite non è un’impennata — quindi certe settimane i titoli saranno pochi.":"Games released in the last four months that are getting noticed: this is where an unknown title surfaces. Only clear movements count — going from one to four visits is not a surge — so some weeks there will be few titles.",
+"Date da definire":"Dates to be announced","Chiudi":"Close","Apri":"Open",
+"Titoli con finestra vaga, dal più chiacchierato al meno.":"Titles with a vague release window, from most talked about to least.",
+"Dati, copertine e voti forniti da":"Data, covers and scores provided by",
+". Grazie a IGDB e alla sua comunità, che tengono aggiornato il catalogo da cui nasce questo sito.":". Thanks to IGDB and its community, who keep up to date the catalogue this site is built on.",
+"Playrain non è affiliato a IGDB, Twitch, agli store collegati né agli editori. Nomi, marchi e copertine dei giochi appartengono ai rispettivi proprietari.":"Playrain is not affiliated with IGDB, Twitch, the linked stores or the publishers. Game names, trademarks and covers belong to their respective owners.",
+"Caratteri Archivo, Fraunces e JetBrains Mono, licenza SIL Open Font License.":"Archivo, Fraunces and JetBrains Mono typefaces, SIL Open Font License.",
+"Legenda:":"Legend:","uscita tripla A":"AAA release","in evidenza":"featured","altra uscita":"other release","oggi":"today","data spostata":"date moved",
+/* testi generati dallo script */
+"Cerca su Steam":"Search on Steam","Cerca su PlayStation Store":"Search on PlayStation Store","Cerca su Nintendo":"Search on Nintendo","Cerca su Xbox":"Search on Xbox","Scheda informativa":"Info page",
+"Gratis":"Free","Data spostata":"Date moved","{n} uscite":"{n} releases",", include un'uscita tripla A":", includes a AAA release",
+"RILEVANTI":"NOTABLE","USCITE TOTALI":"TOTAL RELEASES","RIL":"NOT",
+"{a} USCITE · {b} IN EVIDENZA":"{a} RELEASES · {b} FEATURED"," · OGGI":" · TODAY",
+"In evidenza":"Featured","Nessuna uscita in questo giorno.":"No releases on this day.","Altre uscite":"Other releases","Nient’altro in uscita.":"Nothing else coming out.",
+"▼ mostra le altre {n}":"▼ show the other {n}",
+"Percentile di attesa fra i titoli non ancora usciti, da IGDB":"Anticipation percentile among unreleased titles, from IGDB","ATTESA":"HYPE",
+"↺ SPOSTATO DA":"↺ MOVED FROM",
+"CHI CI GIOCA":"PLAYING NOW","PICCO GIOCATORI 24H":"24H PLAYER PEAK","VISITE SU IGDB":"IGDB VISITS","LO VOGLIONO":"WANT TO PLAY","ATTESE":"HYPES","POPOLARITÀ":"POPULARITY",
+"PERCENTILE":"PERCENTILE","gg":"d",
+"Nessun movimento netto":"No clear movement","NEGLI ULTIMI {n} GIORNI NESSUN TITOLO SI DISTINGUE DAL RUMORE":"IN THE LAST {n} DAYS NO TITLE STANDS OUT FROM THE NOISE",
+" GIORNO":" DAY"," GIORNI":" DAYS","AL PRIMO DATO":"TO THE FIRST DATA POINT",
+"● Raccolta dati in corso — {n} titoli con storico sotto i {w} giorni":"● Collecting data — {n} titles with less than {w} days of history",
+" GG":" D","ALTRI":"MORE",
+"ultimi 7 giorni":"last 7 days","ultimi 30 giorni":"last 30 days","ultimi 12 mesi":"last 12 months",
+"Nessun titolo con voto della stampa negli {p}":"No press-scored titles in the {p}"," per il genere “{g}”":" for the genre “{g}”",
+". I voti arrivano con il giro notturno su IGDB: finché la fonte è lo snapshot, ne sono presenti pochi.":". Scores arrive with the nightly IGDB run: while the source is the snapshot, only a few are present.",
+"UTENTI":"USERS","REC":"REV","STAMPA":"PRESS",
+"Nessun titolo di genere “{g}” in questa classifica.":"No “{g}” titles in this ranking.",
+"Classifica non disponibile: il primo giro del cron non è ancora passato.":"Ranking not available: the first nightly run hasn't happened yet.",
+"Mostra solo i primi 12":"Show only the top 12","Mostra tutti e {n}":"Show all {n}",
+"Nessun titolo somiglia a “{q}”.":"No title looks like “{q}”."," TITOLO":" TITLE"," TITOLI":" TITLES","FORSE CERCAVI":"DID YOU MEAN",
+"tutti i generi":"all genres","▼ mostra tutti e {n}":"▼ show all {n}"," titolo":" title"," titoli":" titles",
+"Aggiornato il {d}":"Updated {d}",
+"Dati non aggiornati: la pagina sta usando lo snapshot incorporato del {d}.":"Data not up to date: the page is using the built-in snapshot from {d}.",
+"Lingua":"Language","Passa all'italiano":"Switch to Italian","Switch to English":"Switch to English",
+/* generi IGDB, gia' tradotti in italiano dal sync */
+"Avventura":"Adventure","Simulazione":"Simulation","Strategia":"Strategy","GDR":"RPG","Sparatutto":"Shooter","Corse":"Racing",
+"Carte e tavolo":"Card & board","Punta e clicca":"Point-and-click","Strategia a turni":"Turn-based strategy","Azione":"Action",
+"Tattico":"Tactical","Picchiaduro":"Fighting","Musicale":"Music","Flipper":"Pinball"
+};
+var MESI_EN={gen:"Jan",feb:"Feb",mar:"Mar",apr:"Apr",mag:"May",giu:"Jun",lug:"Jul",ago:"Aug",set:"Sep",ott:"Oct",nov:"Nov",dic:"Dec"};
+function fill(t,v){return v?t.replace(/\{(\w+)\}/g,function(m,k){return v[k]!=null?v[k]:m;}):t;}
+window.T=function(k,v){return fill(L==="en"&&EN[k]!=null?EN[k]:k,v);};
+/* "dic 2026" -> "Dec 2026"; "Q1 2027", "2027" e "TBA" vanno bene in tutte e due. */
+window.TV=function(s){return L==="en"&&s?String(s).replace(/^([a-z]{3})\b/,function(m){return MESI_EN[m]||m;}):s;};
+window.setLang=function(x){try{localStorage.setItem("playrain-lang",x);}catch(e){}location.reload();};
+if(L==="en"){
+  var norm=function(x){return x.replace(/\s+/g," ").trim();};
+  var w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT),nd,todo=[];
+  while((nd=w.nextNode()))todo.push(nd);
+  todo.forEach(function(t){
+    if(t.parentNode&&/^(SCRIPT|STYLE)$/.test(t.parentNode.nodeName))return;
+    var k=norm(t.nodeValue);if(!k||EN[k]==null)return;
+    var lead=/^\s/.test(t.nodeValue)?" ":"",trail=/\s$/.test(t.nodeValue)?" ":"";
+    t.nodeValue=lead+EN[k]+trail;
+  });
+  [].forEach.call(document.querySelectorAll("[placeholder],[aria-label],[title]"),function(el){
+    ["placeholder","aria-label","title"].forEach(function(a){
+      var v=el.getAttribute(a);if(v&&EN[norm(v)]!=null)el.setAttribute(a,EN[norm(v)]);
+    });
+  });
+  var md=document.querySelector('meta[name="description"]');
+  if(md)md.setAttribute("content","Playrain: the release calendar for upcoming video games on PC, Switch 2, PS5 and Xbox, with rankings and rising titles.");
+}
+var lb=document.getElementById("langbtn");
+if(lb){
+  lb.textContent=L==="en"?"IT":"EN";
+  lb.setAttribute("aria-label",L==="en"?"Passa all'italiano":"Switch to English");
+  lb.addEventListener("click",function(){setLang(L==="en"?"it":"en");});
+}
+})();
+</script>
+<script>
 (function(){
 "use strict";
 /* ---------------- util ---------------- */
 function h32(s){var h=2166136261;for(var i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619);}return h>>>0;}
 function mul(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
-var MESI_LUNGHI=["gennaio","febbraio","marzo","aprile","maggio","giugno","luglio","agosto",
+var MESI_LUNGHI=LANG==="en"?["January","February","March","April","May","June","July","August",
+  "September","October","November","December"]:["gennaio","febbraio","marzo","aprile","maggio","giugno","luglio","agosto",
   "settembre","ottobre","novembre","dicembre"];
 function dataLunga(s){
   var p=s.split("-");
@@ -762,9 +851,9 @@ function dataLunga(s){
 function iso(d){return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");}
 function pdate(s){var p=s.split("-");return new Date(+p[0],+p[1]-1,+p[2]);}
 function addD(s,n){var d=pdate(s);d.setDate(d.getDate()+n);return iso(d);}
-var MESI=["gennaio","febbraio","marzo","aprile","maggio","giugno","luglio","agosto","settembre","ottobre","novembre","dicembre"];
-var GIORNI=["domenica","lunedì","martedì","mercoledì","giovedì","venerdì","sabato"];
-var DOWS=["LUN","MAR","MER","GIO","VEN","SAB","DOM"];
+var MESI=MESI_LUNGHI;
+var GIORNI=LANG==="en"?["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]:["domenica","lunedì","martedì","mercoledì","giovedì","venerdì","sabato"];
+var DOWS=LANG==="en"?["MON","TUE","WED","THU","FRI","SAT","SUN"]:["LUN","MAR","MER","GIO","VEN","SAB","DOM"];
 /* La data di oggi era una costante scritta a mano, e il giorno dopo era gia'
    sbagliata: la cella "oggi", la finestra dei migliori e il filtro degli usciti
    seguivano una data ferma. Si prende dall'orologio, in ora locale come tutto il
@@ -785,7 +874,7 @@ var REL=50; /* soglia attesa per "atteso dalla comunità" */
    significa — GTA VI, Elder Scrolls VI, Fable, Kingdom Come II, Monster Hunter
    Wilds. Una soglia va riletta ogni volta che cambia la scala sotto. */
 var AAA=70;
-function eur(n){return n===0?"Gratis":n.toFixed(2).replace(".",",")+" €";}
+function eur(n){return n===0?T("Gratis"):(LANG==="en"?"€"+n.toFixed(2):n.toFixed(2).replace(".",",")+" €");}
 
 /* Confronto fra titoli: minuscole e via gli accenti, così "pokemon" trova
    "Pokémon" e "FINAL FANTASY" trova "Final Fantasy". */
@@ -892,11 +981,11 @@ function platsOf(s){return s.split("").map(function(c){return PMAP[c];});}
 function q(t){return encodeURIComponent(t.replace(/—/g,"-"));}
 function linksFor(t,plat){
   var L=[];
-  if(plat.indexOf("pc")>=0)L.push({k:"steam",u:"https://store.steampowered.com/search/?term="+q(t),n:"Cerca su Steam"});
-  if(plat.indexOf("ps5")>=0)L.push({k:"bag",u:"https://store.playstation.com/it-it/search/"+q(t),n:"Cerca su PlayStation Store"});
-  if(plat.indexOf("switch2")>=0)L.push({k:"bag",u:"https://www.nintendo.com/search/?q="+q(t),n:"Cerca su Nintendo"});
-  if(plat.indexOf("xbox")>=0)L.push({k:"bag",u:"https://www.xbox.com/it-IT/search/results/games?q="+q(t),n:"Cerca su Xbox"});
-  L.push({k:"globe",u:"https://en.wikipedia.org/w/index.php?search="+q(t+" video game"),n:"Scheda informativa"});
+  if(plat.indexOf("pc")>=0)L.push({k:"steam",u:"https://store.steampowered.com/search/?term="+q(t),n:T("Cerca su Steam")});
+  if(plat.indexOf("ps5")>=0)L.push({k:"bag",u:"https://store.playstation.com/"+(LANG==="en"?"en-us":"it-it")+"/search/"+q(t),n:T("Cerca su PlayStation Store")});
+  if(plat.indexOf("switch2")>=0)L.push({k:"bag",u:"https://www.nintendo.com/search/?q="+q(t),n:T("Cerca su Nintendo")});
+  if(plat.indexOf("xbox")>=0)L.push({k:"bag",u:"https://www.xbox.com/"+(LANG==="en"?"en-US":"it-IT")+"/search/results/games?q="+q(t),n:T("Cerca su Xbox")});
+  L.push({k:"globe",u:"https://en.wikipedia.org/w/index.php?search="+q(t+" video game"),n:T("Scheda informativa")});
   return L;
 }
 var GAMES=[],DATA_SRC="";
@@ -1001,11 +1090,11 @@ function cellHTML(d,inMonth){
     if(state.badge==="compact"){
       if(rest>0)badge='<span class="badge px">+'+rest+'</span>';
     }else{
-      badge='<span class="badge two px">'+(mqM.matches?'<b>'+rel.length+'</b>·'+tot:'<b>'+rel.length+' RIL</b> · '+tot+' TOT')+'</span>';
+      badge='<span class="badge two px">'+(mqM.matches?'<b>'+rel.length+'</b>·'+tot:'<b>'+rel.length+' '+T("RIL")+'</b> · '+tot+' TOT')+'</span>';
     }
   }
-  var shift=list.some(function(g){return g.was;})?'<span class="shift px" title="Data spostata">↺</span>':"";
-  return '<button type="button" class="'+cls+'" data-d="'+ds+'" aria-label="'+d.getDate()+" "+MESI[d.getMonth()]+", "+tot+' uscite'+(aaa?", include un'uscita tripla A":"")+'">'+
+  var shift=list.some(function(g){return g.was;})?'<span class="shift px" title="'+T("Data spostata")+'">↺</span>':"";
+  return '<button type="button" class="'+cls+'" data-d="'+ds+'" aria-label="'+d.getDate()+" "+MESI[d.getMonth()]+", "+T("{n} uscite",{n:tot})+(aaa?T(", include un'uscita tripla A"):"")+'">'+
     '<span class="dnum">'+d.getDate()+'</span>'+shift+'<span class="chips">'+chips+'</span>'+badge+'</button>';
 }
 function buildGrid(){
@@ -1029,7 +1118,7 @@ function renderMeta(){
       var l=dayList(ds);tot+=l.length;rel+=l.filter(function(g){return g.hype>=REL;}).length;
     }
   });
-  document.getElementById("mmeta").innerHTML='<b>'+rel+'</b> RILEVANTI<br><b>'+tot+'</b> USCITE TOTALI';
+  document.getElementById("mmeta").innerHTML='<b>'+rel+'</b> '+T("RILEVANTI")+'<br><b>'+tot+'</b> '+T("USCITE TOTALI");
 }
 function renderAll(){buildGrid();renderMeta();if(state.sel)renderPanel();}
 
@@ -1119,7 +1208,7 @@ function platChips(g){
   return g.plat.map(function(p){return '<span class="pchip '+p+' notch-s">'+svg(p)+PLAT[p]+'</span>';}).join("");
 }
 function priceOf(g){
-  return g.vague?'<span class="price px">'+esc(g.vague)+'</span>':"";
+  return g.vague?'<span class="price px">'+esc(TV(g.vague))+'</span>':"";
 }
 function linksOf(g){
   var out=g.links.map(function(l){
@@ -1130,12 +1219,12 @@ function linksOf(g){
 function hypeBar(g){
   var n=10,on=Math.round(g.hype/10),c="";
   for(var i=0;i<n;i++)c+='<i class="'+(i<on?"on":"")+'"></i>';
-  return'<span class="hypebar"><span class="lab" title="Percentile di attesa fra i titoli non ancora usciti, da IGDB">ATTESA</span><span class="track">'+c+'</span><b>'+g.hype+'</b></span>';
+  return'<span class="hypebar"><span class="lab" title="'+T("Percentile di attesa fra i titoli non ancora usciti, da IGDB")+'">'+T("ATTESA")+'</span><span class="track">'+c+'</span><b>'+g.hype+'</b></span>';
 }
 function shiftNote(g){
   if(!g.was)return"";
   var d=pdate(g.was);
-  return'<span class="shiftnote px">↺ SPOSTATO DA <s>'+d.getDate()+" "+MESI[d.getMonth()].slice(0,3)+" "+d.getFullYear()+'</s></span>';
+  return'<span class="shiftnote px">'+T("↺ SPOSTATO DA")+' <s>'+d.getDate()+" "+MESI[d.getMonth()].slice(0,3)+" "+d.getFullYear()+'</s></span>';
 }
 /* Una soglia serve a scegliere dentro un elenco lungo. Su un giorno da due uscite
    non scegli niente: filtravi due titoli e la sezione "In evidenza" restava vuota
@@ -1152,11 +1241,11 @@ function splitDay(list){
 function renderPanel(){
   var ds=state.sel,d=pdate(ds),list=dayList(ds);
   var sp=splitDay(list),rel=sp.rel,oth=sp.oth;
-  document.getElementById("ptitle").textContent=GIORNI[d.getDay()].toUpperCase()+" "+d.getDate()+" "+MESI[d.getMonth()].toUpperCase();
-  document.getElementById("psub").textContent=list.length+" USCITE · "+rel.length+" IN EVIDENZA"+(ds===TODAY?" · OGGI":"");
+  document.getElementById("ptitle").textContent=(LANG==="en"?GIORNI[d.getDay()].toUpperCase()+" "+MESI[d.getMonth()].toUpperCase()+" "+d.getDate():GIORNI[d.getDay()].toUpperCase()+" "+d.getDate()+" "+MESI[d.getMonth()].toUpperCase());
+  document.getElementById("psub").textContent=T("{a} USCITE · {b} IN EVIDENZA",{a:list.length,b:rel.length})+(ds===TODAY?T(" · OGGI"):"");
   var h="";
-  h+='<div><div class="blk-h"><h3>In evidenza</h3><span class="n px">'+rel.length+'</span><span class="rule"></span></div>';
-  if(!rel.length)h+='<div class="empty">Nessuna uscita in questo giorno.</div>';
+  h+='<div><div class="blk-h"><h3>'+T("In evidenza")+'</h3><span class="n px">'+rel.length+'</span><span class="rule"></span></div>';
+  if(!rel.length)h+='<div class="empty">'+T("Nessuna uscita in questo giorno.")+'</div>';
   else h+='<div class="feat">'+rel.map(function(g){
     var tr=tierOf(g),cw=tr==="t1"?140:tr==="t2"?104:72;
     return'<article class="fcard '+tr+'">'+covImg(g,cw,Math.round(cw*4/3),"t_cover_big")+
@@ -1166,8 +1255,8 @@ function renderPanel(){
       hypeBar(g)+shiftNote(g)+'</div></article>';
   }).join("")+'</div></div>';
 
-  h+='<div><div class="blk-h"><h3>Altre uscite</h3><span class="n px">'+oth.length+'</span><span class="rule"></span></div>';
-  if(!oth.length)h+='<div class="empty">Nient’altro in uscita.</div>';
+  h+='<div><div class="blk-h"><h3>'+T("Altre uscite")+'</h3><span class="n px">'+oth.length+'</span><span class="rule"></span></div>';
+  if(!oth.length)h+='<div class="empty">'+T("Nient’altro in uscita.")+'</div>';
   else{
     var lim=state.moreOpen?oth.length:12,shown=oth.slice(0,lim);
     h+='<div class="oth">'+shown.map(function(g){
@@ -1176,7 +1265,7 @@ function renderPanel(){
         '<span style="min-width:0"><span class="ot">'+esc(g.t)+'</span><span class="ometa"><span class="odots">'+dots+'</span>'+g.plat.map(function(p){return PLAT[p];}).join(" · ")+(g.was?' · ↺':'')+'</span></span>'+
         priceOf(g)+'</a>';
     }).join("");
-    if(oth.length>lim)h+='<button type="button" class="showmore px" id="smore">▼ mostra le altre '+(oth.length-lim)+'</button>';
+    if(oth.length>lim)h+='<button type="button" class="showmore px" id="smore">'+T("▼ mostra le altre {n}",{n:oth.length-lim})+'</button>';
     h+='</div>';
   }
   h+='</div>';
@@ -1190,7 +1279,7 @@ function renderPanel(){
 /* storico: array di {d:"AAAA-MM-GG", f:valore, m:metrica}, ordinato per data.
    La finestra si calcola sulle date vere, non sulla posizione: un giorno di cron
    saltato non falsa il conto. */
-var METRICA={3:"CHI CI GIOCA",5:"PICCO GIOCATORI 24H",1:"VISITE SU IGDB",2:"LO VOGLIONO",0:"ATTESE"};
+var METRICA={3:T("CHI CI GIOCA"),5:T("PICCO GIOCATORI 24H"),1:T("VISITE SU IGDB"),2:T("LO VOGLIONO"),0:T("ATTESE")};
 
 /* Solo la coda di punti misurati con la stessa metrica dell'ultimo. Quando un
    gioco esce, il numero seguito passa da "quanti lo vogliono" a "quanti ci
@@ -1316,26 +1405,26 @@ function renderGrowth(){
   if(!top.length&&piuLungo>=W){
     /* Lo storico c'e', semplicemente nessuno si sta muovendo davvero: e' un
        risultato, non un'attesa, e va detto cosi'. */
-    h+='<div class="collect notch"><p class="giorni" style="font-size:clamp(20px,4vw,28px)">Nessun movimento netto'+
-      '<small>NEGLI ULTIMI '+W+' GIORNI NESSUN TITOLO SI DISTINGUE DAL RUMORE</small></p></div>';
+    h+='<div class="collect notch"><p class="giorni" style="font-size:clamp(20px,4vw,28px)">'+T("Nessun movimento netto")+
+      '<small>'+T("NEGLI ULTIMI {n} GIORNI NESSUN TITOLO SI DISTINGUE DAL RUMORE",{n:W})+'</small></p></div>';
   }else if(!top.length){
     /* Il primo dato arriva quando una serie copre la finestra scelta: quel che
        manca e' la finestra meno lo storico piu' lungo gia' raccolto. Un giro di
        cron al giorno, quindi i giri mancanti sono giorni. */
     var restano=Math.max(0,W-piuLungo);
     h+='<div class="collect notch">'+
-      '<p class="giorni">'+restano+(restano===1?' GIORNO':' GIORNI')+
-      '<small>AL PRIMO DATO</small></p></div>';
+      '<p class="giorni">'+restano+(restano===1?T(' GIORNO'):T(' GIORNI'))+
+      '<small>'+T("AL PRIMO DATO")+'</small></p></div>';
   }else{
     h+='<div class="gcards">'+top.map(function(o,i){
       var g=o.g,r=o.r;
-      var when=g.date?(pdate(g.date).getDate()+" "+MESI[pdate(g.date).getMonth()].slice(0,3)):g.vague;
+      var when=g.date?(pdate(g.date).getDate()+" "+MESI[pdate(g.date).getMonth()].slice(0,3)):TV(g.vague);
       return'<a class="gcard notch" href="'+esc(g.links[0].u)+'" target="_blank" rel="noopener noreferrer"'+
         ' title="'+esc(g.links[0].n+" — "+g.t)+'">'+covImg(g,54,72,"t_cover_small")+''+
         '<div style="min-width:0"><div style="display:flex;gap:6px;align-items:flex-start"><h4 class="gt" style="font-size:14px;flex:1;min-width:0">'+esc(g.t)+'</h4><span class="rank px">#'+(i+1)+'</span></div>'+
-        '<div class="gr"><span class="pc-up">+'+r.pct.toFixed(r.pct<10?1:0).replace(".",",")+'%</span><span class="pc-lab">'+W+' gg</span></div>'+
+        '<div class="gr"><span class="pc-up">+'+r.pct.toFixed(r.pct<10?1:0).replace(".",",")+'%</span><span class="pc-lab">'+W+' '+T("gg")+'</span></div>'+
         sparkHTML(g.hist,W)+
-        '<div class="folw"><span>'+o.pPrev+'° → '+o.pLast+'° PERCENTILE · '+(METRICA[r.m]||"POPOLARITÀ")+'</span><span>'+when.toUpperCase()+'</span></div>'+
+        '<div class="folw"><span>'+o.pPrev+'° → '+o.pLast+'° '+T("PERCENTILE")+' · '+(METRICA[r.m]||T("POPOLARITÀ"))+'</span><span>'+when.toUpperCase()+'</span></div>'+
         '<div class="rowx" style="margin-top:7px">'+g.plat.map(function(p){return'<span class="pchip '+p+' notch-s">'+svg(p)+PLAT[p]+'</span>';}).join("")+'</div>'+
         '</div></a>';
     }).join("")+'</div>';
@@ -1343,11 +1432,11 @@ function renderGrowth(){
   /* A sezione vuota non si aggiunge niente sotto: il riquadro dice quanto manca,
      e un secondo elenco di attesa accanto al primo e' solo rumore. */
   if(top.length&&partial.length){
-    h+='<div class="partial notch"><h4>● Raccolta dati in corso — '+partial.length+' titoli con storico sotto i '+W+' giorni</h4><div class="plist">'+
+    h+='<div class="partial notch"><h4>'+T("● Raccolta dati in corso — {n} titoli con storico sotto i {w} giorni",{n:partial.length,w:W})+'</h4><div class="plist">'+
       partial.slice(0,14).map(function(g){
-        return'<span class="pitem notch-s"><span>'+esc(g.t)+'</span><em>'+histSpan(g.hist)+' GG</em></span>';
+        return'<span class="pitem notch-s"><span>'+esc(g.t)+'</span><em>'+histSpan(g.hist)+T(' GG')+'</em></span>';
       }).join("")+
-      (partial.length>14?'<span class="pitem notch-s"><em>+'+(partial.length-14)+' ALTRI</em></span>':"")+
+      (partial.length>14?'<span class="pitem notch-s"><em>+'+(partial.length-14)+' '+T("ALTRI")+'</em></span>':"")+
       '</div></div>';
   }
   body.innerHTML=h;
@@ -1371,17 +1460,17 @@ function renderBest(){
   var lista=GAMES.filter(function(g){
     return g.score&&g.date&&g.date<=TODAY&&g.date>da&&visible(g);
   }).sort(function(a,b){return b.score-a.score||b.scoreN-a.scoreN;});
-  var nome=P===7?"ultimi 7 giorni":P===30?"ultimi 30 giorni":"ultimi 12 mesi";
+  var nome=T(P===7?"ultimi 7 giorni":P===30?"ultimi 30 giorni":"ultimi 12 mesi");
   if(!lista.length){
-    body.innerHTML='<div class="empty">Nessun titolo con voto della stampa negli '+nome+
-      (state.genre?' per il genere “'+esc(state.genre)+'”':'')+
-      '. I voti arrivano con il giro notturno su IGDB: finché la fonte è lo snapshot, ne sono presenti pochi.</div>';
+    body.innerHTML='<div class="empty">'+T("Nessun titolo con voto della stampa negli {p}",{p:nome})+
+      (state.genre?T(" per il genere “{g}”",{g:esc(T(state.genre))}):'')+
+      T(". I voti arrivano con il giro notturno su IGDB: finché la fonte è lo snapshot, ne sono presenti pochi.")+'</div>';
     return;
   }
   body.innerHTML='<div class="rank-list">'+lista.slice(0,24).map(function(g,i){
     var d=pdate(g.date);
     var cls=g.score>=85?"":g.score>=70?"mid":"low";
-    var gen=(g.genres||[]).slice(0,3).map(function(x){return'<span class="gtag">'+esc(x)+'</span>';}).join("");
+    var gen=(g.genres||[]).slice(0,3).map(function(x){return'<span class="gtag">'+esc(T(x))+'</span>';}).join("");
     return'<a class="ritem'+(i<3?" top"+(i+1):"")+'" href="'+esc(g.links[0].u)+'" target="_blank" rel="noopener noreferrer">'+
       '<span class="pos px">'+(i+1)+'</span>'+
       covImg(g,76,101,"t_cover_big")+
@@ -1389,7 +1478,7 @@ function renderBest(){
       '<span class="rmeta">'+d.getDate()+" "+MESI[d.getMonth()].slice(0,3)+" "+d.getFullYear()+
       ' · '+g.plat.map(function(p){return PLAT[p];}).join(" · ")+'</span>'+
       (gen?'<span class="genres">'+gen+'</span>':'')+'</span>'+
-      '<span class="sbox '+cls+'"><i>'+g.score+'</i><em>'+(g.scoreKind==="utenti"?"UTENTI":(g.scoreN?g.scoreN+" REC":"STAMPA"))+'</em></span>'+
+      '<span class="sbox '+cls+'"><i>'+g.score+'</i><em>'+(g.scoreKind==="utenti"?T("UTENTI"):(g.scoreN?g.scoreN+" "+T("REC"):T("STAMPA")))+'</em></span>'+
       '</a>';
   }).join("")+'</div>';
 }
@@ -1410,12 +1499,12 @@ function renderAllTime(){
   if(!lista.length){
     /* Due vuoti diversi: nessun dato affatto, o un genere che non ha titoli in lista. */
     body.innerHTML='<div class="empty">'+(state.genre
-      ?'Nessun titolo di genere “'+esc(state.genre)+'” in questa classifica.'
-      :'Classifica non disponibile: il primo giro del cron non è ancora passato.')+'</div>';
+      ?T("Nessun titolo di genere “{g}” in questa classifica.",{g:esc(T(state.genre))})
+      :T("Classifica non disponibile: il primo giro del cron non è ancora passato."))+'</div>';
     btn.hidden=true;return;
   }
   btn.hidden=lista.length<=12;
-  btn.textContent=allOpen?"Mostra solo i primi 12":"Mostra tutti e "+lista.length;
+  btn.textContent=allOpen?T("Mostra solo i primi 12"):T("Mostra tutti e {n}",{n:lista.length});
   var mostra=allOpen?lista:lista.slice(0,12);
   body.innerHTML='<div class="rank-list">'+mostra.map(function(g,i){
     var pos=ALLTIME.indexOf(g)+1;
@@ -1425,7 +1514,7 @@ function renderAllTime(){
        colore piu' spento mentre il sesto era dorato. Due scale per la stessa
        colonna si leggono come un errore, perche' lo sono. */
     var cls=pos<=10?"":pos<=25?"mid":"low";
-    var gen=(g.genres||[]).slice(0,2).map(function(x){return'<span class="gtag">'+esc(x)+'</span>';}).join("");
+    var gen=(g.genres||[]).slice(0,2).map(function(x){return'<span class="gtag">'+esc(T(x))+'</span>';}).join("");
     return'<a class="ritem'+(pos<=3?" top"+pos:"")+'" href="https://en.wikipedia.org/w/index.php?search='+
       encodeURIComponent(g.t+" video game")+'" target="_blank" rel="noopener noreferrer">'+
       '<span class="pos px">'+pos+'</span>'+
@@ -1433,7 +1522,7 @@ function renderAllTime(){
       '<span class="rtx"><b>'+esc(g.t)+'</b>'+
       '<span class="rmeta">'+g.year+' · '+esc(g.platName)+'</span>'+
       (gen?'<span class="genres">'+gen+'</span>':'')+'</span>'+
-      '<span class="sbox '+cls+'"><i>'+g.score+'</i><em>'+(g.scoreN?g.scoreN+" REC":"STAMPA")+'</em></span>'+
+      '<span class="sbox '+cls+'"><i>'+g.score+'</i><em>'+(g.scoreN?g.scoreN+" "+T("REC"):T("STAMPA"))+'</em></span>'+
       '</a>';
   }).join("")+'</div>';
 }
@@ -1579,18 +1668,18 @@ function qRender(){
   var simili=r.simili.slice(0,Math.max(0,Q_MAX-esatti.length));
   qHits=esatti.concat(simili);qSel=-1;
   if(!qHits.length){
-    qResEl.innerHTML='<div class="qhead">Nessun titolo somiglia a “'+esc(qEl.value.trim())+'”.</div>';
+    qResEl.innerHTML='<div class="qhead">'+T("Nessun titolo somiglia a “{q}”.",{q:esc(qEl.value.trim())})+'</div>';
   }else{
     var n=r.esatti.length,html="";
     if(esatti.length){
-      html+='<div class="qhead">'+n+(n===1?' TITOLO':' TITOLI')+
+      html+='<div class="qhead">'+n+(n===1?T(' TITOLO'):T(' TITOLI'))+
         (r.esatti.length>esatti.length?' · MOSTRO I PRIMI '+esatti.length:'')+'</div>'+
         esatti.map(function(g,i){return qRow(g,i);}).join("");
     }
     /* L'intestazione separata e' il punto: dice che da qui in giu' il titolo non
        contiene quello che hai scritto, somiglia. */
     if(simili.length){
-      html+='<div class="qhead">FORSE CERCAVI</div>'+
+      html+='<div class="qhead">'+T("FORSE CERCAVI")+'</div>'+
         simili.map(function(g,i){return qRow(g,esatti.length+i);}).join("");
     }
     qResEl.innerHTML=html;
@@ -1656,8 +1745,8 @@ function popolaGeneri(){
   GAMES.forEach(function(g){(g.genres||[]).forEach(function(x){set[x]=(set[x]||0)+1;});});
   ALLTIME.forEach(function(g){(g.genres||[]).forEach(function(x){set[x]=(set[x]||0)+1;});});
   var voci=Object.keys(set).sort(function(a,b){return set[b]-set[a]||a.localeCompare(b);});
-  gsel.innerHTML='<option value="">tutti i generi</option>'+voci.map(function(x){
-    return'<option value="'+x+'">'+x+' ('+set[x]+')</option>';
+  gsel.innerHTML='<option value="">'+T("tutti i generi")+'</option>'+voci.map(function(x){
+    return'<option value="'+esc(x)+'">'+esc(T(x))+' ('+set[x]+')</option>';
   }).join("");
   gsel.value=state.genre;
   gsel.disabled=!voci.length;
@@ -1677,9 +1766,9 @@ var tbaOpen=true,tbaAll=false;
 function renderTba(){
   var list=GAMES.filter(function(g){return g.vague&&visible(g);}).sort(function(a,b){return b.hype-a.hype;});
   var el=document.getElementById("tbalist"),btn=document.getElementById("tbabtn");
-  document.getElementById("tbacount").textContent=list.length+(list.length===1?" titolo":" titoli");
+  document.getElementById("tbacount").textContent=list.length+(list.length===1?T(" titolo"):T(" titoli"));
   btn.hidden=!list.length;
-  btn.textContent=tbaOpen?"Chiudi":"Apri";
+  btn.textContent=tbaOpen?T("Chiudi"):T("Apri");
   btn.setAttribute("aria-expanded",tbaOpen?"true":"false");
   el.hidden=!tbaOpen;
   var piu=document.getElementById("tbamore");
@@ -1691,12 +1780,12 @@ function renderTba(){
     return'<a class="tbai" href="'+esc(g.links[0].u)+'" target="_blank" rel="noopener noreferrer">'+covImg(g,44,59,"t_cover_small")+''+
       '<span style="min-width:0;flex:1"><span class="ot" style="display:block">'+esc(g.t)+'</span>'+
       '<span class="ometa"><span class="odots">'+dots+'</span>'+g.plat.map(function(p){return PLAT[p];}).join(" · ")+'</span></span>'+
-      '<span class="tbad">'+esc(g.vague)+'</span></a>';
+      '<span class="tbad">'+esc(TV(g.vague))+'</span></a>';
   }).join("");
   if(!tbaAll&&list.length>TBA_PASSO){
     var b=document.createElement("button");
     b.type="button";b.className="showmore px";b.id="tbamore";
-    b.textContent="▼ mostra tutti e "+list.length;
+    b.textContent=T("▼ mostra tutti e {n}",{n:list.length});
     b.addEventListener("click",function(){tbaAll=true;renderTba();});
     el.parentNode.insertBefore(b,el.nextSibling);
   }
@@ -1744,11 +1833,11 @@ Promise.all([grab("data.json"),grab("history.json")]).then(function(res){
   if(d&&d.games&&d.games.length){
     buildGames(d.games,hist);
     ALLTIME=d.allTime||[];
-    DATA_SRC=d.generated?"Aggiornato il "+dataLunga(d.generated):"";
+    DATA_SRC=d.generated?T("Aggiornato il {d}",{d:dataLunga(d.generated)}):"";
   }else{
     buildGames(fallbackRows(),hist);
     ALLTIME=FALLBACK.allTime||[];
-    DATA_SRC="Dati non aggiornati: la pagina sta usando lo snapshot incorporato del "+dataLunga(FALLBACK.generated)+".";
+    DATA_SRC=T("Dati non aggiornati: la pagina sta usando lo snapshot incorporato del {d}.",{d:dataLunga(FALLBACK.generated)});
   }
   apriOggi();
   paint();
