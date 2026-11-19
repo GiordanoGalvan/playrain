@@ -1990,7 +1990,9 @@ document.getElementById("calsub").addEventListener("click",function(){
    in locale. */
 /* Chiave "publishable": e' pubblica per progetto. A proteggere i dati sono le
    regole RLS di supabase/schema.sql, non il segreto di questa chiave. */
-var CONFIG={supabaseUrl:"",supabaseKey:""};
+/* Chiave "publishable": e' pubblica per progetto. A proteggere i dati sono le
+   regole RLS di supabase/schema.sql, non il segreto di questa chiave. */
+var CONFIG={supabaseUrl:"https://rkwhittgtrkuxldfbszl.supabase.co",supabaseKey:"sb_publishable_apMAdgmRhB_udZ218QMLtw_HgPQK8s9"};
 var Account=(function(){
   var attivo=!!(CONFIG.supabaseUrl&&CONFIG.supabaseKey);
   var sess=null,utente=null,prefs=null;
