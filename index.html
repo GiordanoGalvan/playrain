@@ -1979,7 +1979,7 @@ document.getElementById("calsub").addEventListener("click",function(){
    Serve solo per due cose: ritrovare i giochi seguiti su un altro dispositivo e
    ricevere la mail il giorno dell'uscita o quando la data cambia. Niente
    password: si entra con un link che arriva per mail. Il servizio e' Supabase,
-   con i dati nell'Unione europea (Francoforte). Si salvano l'indirizzo mail, i
+   con i dati nell'Unione europea (Irlanda). Si salvano l'indirizzo mail, i
    giochi seguiti e le due preferenze di avviso. Niente altro.
 
    Si parla con Supabase via fetch, senza la sua libreria: sono cinque chiamate
@@ -1988,6 +1988,8 @@ document.getElementById("calsub").addEventListener("click",function(){
 
    Finche' CONFIG e' vuoto l'account resta spento e la campanella lavora solo
    in locale. */
+/* Chiave "publishable": e' pubblica per progetto. A proteggere i dati sono le
+   regole RLS di supabase/schema.sql, non il segreto di questa chiave. */
 var CONFIG={supabaseUrl:"",supabaseKey:""};
 var Account=(function(){
   var attivo=!!(CONFIG.supabaseUrl&&CONFIG.supabaseKey);

@@ -91,7 +91,7 @@ browser. L'account (facoltativo) li sincronizza e manda le mail. Finche' i passi
 qui sotto non sono fatti, la pagina mostra "avvisi in arrivo" e gli script
 saltano l'invio senza errori.
 
-Scelte: Supabase con dati in UE (Francoforte) per accesso e database, Brevo
+Scelte: Supabase con dati in UE (Irlanda, eu-west-1) per accesso e database, Brevo
 (Francia) per le mail. Accesso senza password, con link via mail. Nessuna
 libreria esterna nella pagina: parla con Supabase via fetch.
 
