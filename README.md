@@ -84,6 +84,66 @@ comando di build vuoto, directory di pubblicazione `.`.
 Il deploy si riattiva da sé a ogni commit del bot, quindi il sito segue il cron
 senza altri passaggi.
 
+## Account, campanella e avvisi via mail
+
+La campanella funziona subito, senza account: i giochi seguiti restano nel
+browser. L'account (facoltativo) li sincronizza e manda le mail. Finche' i passi
+qui sotto non sono fatti, la pagina mostra "avvisi in arrivo" e gli script
+saltano l'invio senza errori.
+
+Scelte: Supabase con dati in UE (Francoforte) per accesso e database, Brevo
+(Francia) per le mail. Accesso senza password, con link via mail. Nessuna
+libreria esterna nella pagina: parla con Supabase via fetch.
+
+1. **Supabase** — crea un progetto su supabase.com, regione *Central EU
+   (Frankfurt)*. SQL Editor → incolla `supabase/schema.sql` → Run.
+   Authentication → Sign In / Providers: lascia attivo solo *Email*, con
+   "Confirm email" attivo. Authentication → URL Configuration: *Site URL* =
+   indirizzo del sito, e aggiungilo anche fra i *Redirect URLs*.
+2. **Brevo** — crea l'account, verifica il dominio (record DNS che Brevo
+   indica: SPF, DKIM, DMARC), crea una chiave API e le credenziali SMTP.
+   In Supabase → Authentication → SMTP Settings inserisci l'SMTP di Brevo, cosi'
+   anche le mail di accesso partono dal tuo dominio e senza i limiti di prova.
+3. **Pagina** — in `index.html` compila `var CONFIG={supabaseUrl:"…",supabaseKey:"…"}`
+   con Project URL e chiave *anon public* (Settings → API). La chiave anon e'
+   pubblica per progetto: la protezione la fanno le regole RLS dello schema.
+4. **GitHub** → Settings → Secrets and variables → Actions:
+   - Secrets: `SUPABASE_URL`, `SUPABASE_SERVICE_KEY` (chiave *service_role*, mai
+     nella pagina), `BREVO_API_KEY`.
+   - Variables: `MAIL_FROM` (es. `avvisi@playrain.eu`), `PLAYRAIN_SITO`
+     (es. `https://playrain.eu/`).
+
+Prova degli avvisi senza inviare niente: `NOTIFY_DRY=1 node scripts/notify.mjs`
+con `SUPABASE_URL` e `SUPABASE_SERVICE_KEY` impostati. Le mail dei destinatari
+non vengono mai stampate per intero: i registri delle Actions sono pubblici.
+
+## Dominio
+
+1. Compra il dominio (es. `playrain.eu`).
+2. Nel DNS del registrar: quattro record `A` per `@` verso 185.199.108.153,
+   185.199.109.153, 185.199.110.153, 185.199.111.153, e un `CNAME` per `www`
+   verso `giordanogalvan.github.io`.
+3. GitHub → repository → Settings → Pages → Custom domain → il dominio → Save,
+   poi spunta *Enforce HTTPS* appena disponibile. GitHub crea il file `CNAME`.
+4. Aggiorna la variabile `PLAYRAIN_SITO` e, se usi gli account, Site URL e
+   Redirect URLs in Supabase.
+
+## File generati ogni notte
+
+| file | cosa | lo scarica la pagina? |
+|---|---|---|
+| `data.json` | catalogo, date, classifiche | si' |
+| `segnalati.json` | i Segnalati gia' calcolati (`scripts/segnalati.mjs`) | si', pochi KB |
+| `history.json` | storico di popolarita', serve solo al calcolo | no |
+| `cambi.json` | uscite di oggi e date cambiate, per gli avvisi | no |
+| `calendario.ics` | uscite piu' attese, calendario in abbonamento | da Google Calendar & co. |
+
+## Link diretti
+
+`#d=2026-11-24` apre il giorno, `#m=2026-12` il mese; le sezioni hanno ancore
+proprie (`#best`, `#alltime`, `#growth`, `#mine`, `#tba`). Nel pannello del giorno:
+*Copia link*, *Copia lista del giorno*, *Copia settimana*.
+
 ## Prova in locale
 
 ```bash

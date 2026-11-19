@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Playrain — Privacy e fonti</title>
+<meta name="description" content="Come Playrain tratta i dati personali, da dove vengono i dati dei giochi e a chi va il merito.">
+<meta name="theme-color" content="#1f2930">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; object-src 'none'; base-uri 'self'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="icon" href="icons/icon.svg?v=3" type="image/svg+xml">
+<link rel="icon" href="icons/icon-32.png?v=3" sizes="32x32" type="image/png">
+<style>
+@font-face{font-family:"Archivo";font-display:swap;font-weight:400;src:url(fonts/archivo-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:"Archivo";font-display:swap;font-weight:600;src:url(fonts/archivo-latin-600-normal.woff2) format("woff2")}
+@font-face{font-family:"Fraunces";font-display:swap;font-weight:100 900;src:url(fonts/fraunces-latin-standard-normal.woff2) format("woff2")}
+:root{color-scheme:dark;--bg:#1f2930;--ink:#f3efe8;--ink2:#d2cbbf;--ink3:#bdb6a9;--line:#424e59;--acc:#4fe6c4}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink2);font:16px/1.65 "Archivo",system-ui,sans-serif}
+main{max-width:760px;margin:0 auto;padding:28px 16px 64px}
+header{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:20px}
+header a.home{display:flex;align-items:center;gap:8px;color:var(--ink);text-decoration:none;font:800 24px/1 "Fraunces",serif;letter-spacing:-.03em}
+header img{height:26px;width:auto}
+header .sp{flex:1}
+button.lang{font:600 11px/1 "Archivo",sans-serif;letter-spacing:.09em;color:var(--ink3);background:none;border:1px solid var(--line);padding:6px 9px;border-radius:2px;cursor:pointer}
+h1{font:600 clamp(28px,6vw,38px)/1.1 "Fraunces",serif;color:var(--ink);margin:10px 0 6px;letter-spacing:-.02em}
+h2{font:600 22px/1.2 "Fraunces",serif;color:var(--ink);margin:34px 0 8px}
+p,li{max-width:68ch}
+a{color:var(--ink);text-decoration-color:var(--acc);text-underline-offset:2px}
+.upd{color:var(--ink3);font-size:13px}
+.box{border:1px solid var(--line);padding:14px 16px;margin:18px 0}
+table{border-collapse:collapse;width:100%;font-size:14px;margin:8px 0}
+th,td{border-bottom:1px solid var(--line);text-align:left;padding:8px 6px;vertical-align:top}
+th{color:var(--ink);font-weight:600}
+[lang="en"] .it,[lang="it"] .en{display:none}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <a class="home" href="./"><img src="icons/icon.svg?v=3" alt=""><span>Playrain</span></a>
+  <span class="sp"></span>
+  <button type="button" class="lang" id="lang">EN</button>
+</header>
+
+<!-- ======================= ITALIANO ======================= -->
+<div class="it">
+<h1>Privacy e fonti</h1>
+<p class="upd">Ultimo aggiornamento: 19 novembre 2026</p>
+
+<div class="box">In breve: Playrain non usa cookie, non ha statistiche di visita, pubblicità o tracciamenti. Per guardare il calendario non serve dare nessun dato. L'account è facoltativo e serve solo a ricevere avvisi via mail sui giochi che segui: in quel caso conserviamo la tua mail, i giochi seguiti e le tue preferenze, e nient'altro. Puoi scaricare o cancellare tutto da solo, in qualsiasi momento.</div>
+
+<h2>Chi tratta i dati</h2>
+<p>Titolare del trattamento è Giordano Galvan, persona fisica, Roma (Italia), che gestisce Playrain a titolo personale e senza scopo di lucro. Per qualsiasi richiesta sulla privacy puoi scrivere aprendo una segnalazione sulla <a href="https://github.com/GiordanoGalvan/playrain/issues" target="_blank" rel="noopener">pagina del progetto</a>; un indirizzo mail dedicato verrà indicato qui appena attivo.</p>
+
+<h2>Se visiti il sito senza account</h2>
+<ul>
+  <li><b>Nessun cookie e nessun tracciamento.</b> Niente statistiche, pubblicità, pixel o pulsanti social.</li>
+  <li><b>Hosting.</b> Il sito è pubblicato con GitHub Pages (GitHub, Inc., USA, aderente all'EU-U.S. Data Privacy Framework). Come ogni server web, GitHub registra l'indirizzo IP dei visitatori nei registri tecnici, per sicurezza e funzionamento. Noi non abbiamo accesso a quei registri.</li>
+  <li><b>Copertine dei giochi.</b> Le immagini arrivano direttamente dal server di IGDB (Twitch Interactive, Inc., USA), che quindi riceve l'indirizzo IP di chi le visualizza.</li>
+  <li><b>Caratteri.</b> I caratteri tipografici sono ospitati sul sito stesso: nessuna richiesta parte verso Google Fonts o servizi simili.</li>
+  <li><b>Memoria del browser.</b> Il sito salva nel tuo browser (localStorage) solo la lingua scelta, i giochi che segui con la campanella e, se entri, la sessione di accesso. Sono informazioni tecniche necessarie al funzionamento che restano sul tuo dispositivo; per questo non serve un consenso (art. 122 del Codice privacy). Puoi cancellarle dalle impostazioni del browser.</li>
+  <li><b>Link esterni.</b> I collegamenti agli store e ai siti ufficiali si aprono solo se li clicchi; da lì valgono le informative di quei siti.</li>
+</ul>
+
+<h2>Se crei un account</h2>
+<table>
+  <tr><th>Quali dati</th><td>Indirizzo mail; elenco dei giochi seguiti; preferenze di avviso (uscita, cambio data); lingua; data di creazione e ultimo accesso. Il fornitore dell'accesso registra inoltre l'indirizzo IP delle richieste di accesso, per sicurezza e limitazione degli abusi.</td></tr>
+  <tr><th>Perché</th><td>Per farti entrare senza password, sincronizzare i giochi seguiti fra i tuoi dispositivi e mandarti le mail che hai chiesto: il giorno dell'uscita di un gioco seguito e quando la sua data cambia o viene fissata.</td></tr>
+  <tr><th>Base giuridica</th><td>Esecuzione del servizio che richiedi (art. 6.1.b GDPR). Nessun uso per marketing, profilazione o cessione a terzi.</td></tr>
+  <tr><th>Dove</th><td>Supabase, Inc. (database e accesso), con i dati in Unione europea, Francoforte. Brevo (Sendinblue SAS, Francia) per l'invio delle mail. Entrambi agiscono come responsabili del trattamento.</td></tr>
+  <tr><th>Per quanto</th><td>Finché tieni l'account. Gli account senza accessi per 24 mesi vengono cancellati.</td></tr>
+  <tr><th>Età minima</th><td>14 anni, come previsto in Italia per l'iscrizione ai servizi online (art. 2-quinquies Codice privacy).</td></tr>
+</table>
+<p>Ogni mail contiene un link per smettere di ricevere avvisi con un clic.</p>
+
+<h2>I tuoi diritti</h2>
+<p>Puoi accedere ai tuoi dati, correggerli, chiederne la cancellazione o la limitazione, opporti al trattamento e riceverli in un formato leggibile. Due di queste cose le fai da solo, nella sezione «I miei giochi»: <b>Scarica i miei dati</b> e <b>Cancella account</b>, che elimina subito e definitivamente mail, giochi seguiti e preferenze. Hai inoltre diritto di proporre reclamo al <a href="https://www.garanteprivacy.it" target="_blank" rel="noopener">Garante per la protezione dei dati personali</a>.</p>
+
+<h2>Contenuti</h2>
+<p>Playrain esclude dal catalogo i titoli a contenuto erotico o pornografico.</p>
+
+<h2>Fonti e ringraziamenti</h2>
+<ul>
+  <li><b>IGDB.com</b>: titoli, date, piattaforme, generi, copertine, voti della stampa e indicatori di popolarità vengono da <a href="https://www.igdb.com" target="_blank" rel="noopener">IGDB</a>, tramite la sua API ufficiale, aggiornati ogni notte. Grazie a IGDB e alla sua comunità, che mantengono il catalogo.</li>
+  <li><b>Store e siti ufficiali</b>: i collegamenti portano alle pagine pubbliche di Steam, PlayStation Store, Nintendo, Xbox e dei produttori.</li>
+  <li><b>Caratteri</b>: Archivo, Fraunces e JetBrains Mono, con licenza SIL Open Font License.</li>
+</ul>
+<p>Le date di uscita cambiano spesso: Playrain le riporta come le pubblica IGDB e non ne garantisce l'esattezza. Playrain non è affiliato a IGDB, Twitch, agli store né agli editori. Nomi, marchi e copertine dei giochi appartengono ai rispettivi proprietari e sono mostrati solo per identificare i titoli.</p>
+</div>
+
+<!-- ======================= ENGLISH ======================= -->
+<div class="en">
+<h1>Privacy &amp; sources</h1>
+<p class="upd">Last updated: 19 November 2026</p>
+
+<div class="box">In short: Playrain uses no cookies, no visit statistics, no ads and no tracking. You don't need to give any data to browse the calendar. The account is optional and only serves to receive email alerts about the games you follow: in that case we keep your email, your followed games and your preferences, and nothing else. You can download or delete everything yourself at any time.</div>
+
+<h2>Who handles the data</h2>
+<p>The data controller is Giordano Galvan, a private individual based in Rome (Italy), who runs Playrain personally and on a non-profit basis. For any privacy request you can open an issue on the <a href="https://github.com/GiordanoGalvan/playrain/issues" target="_blank" rel="noopener">project page</a>; a dedicated email address will be listed here as soon as it is active.</p>
+
+<h2>If you visit without an account</h2>
+<ul>
+  <li><b>No cookies, no tracking.</b> No analytics, ads, pixels or social buttons.</li>
+  <li><b>Hosting.</b> The site is served by GitHub Pages (GitHub, Inc., USA, certified under the EU-U.S. Data Privacy Framework). Like any web server, GitHub records visitors' IP addresses in technical logs for security and operation. We have no access to those logs.</li>
+  <li><b>Game covers.</b> Images load directly from IGDB's server (Twitch Interactive, Inc., USA), which therefore receives the IP address of whoever views them.</li>
+  <li><b>Fonts.</b> Typefaces are hosted on the site itself: no requests go to Google Fonts or similar services.</li>
+  <li><b>Browser storage.</b> The site stores in your browser (localStorage) only your chosen language, the games you follow with the bell and, if you sign in, your session. This is technical information needed for the site to work and it stays on your device, so no consent is required. You can clear it in your browser settings.</li>
+  <li><b>External links.</b> Links to stores and official sites open only if you click them; from there, those sites' policies apply.</li>
+</ul>
+
+<h2>If you create an account</h2>
+<table>
+  <tr><th>What data</th><td>Email address; list of followed games; alert preferences (release, date change); language; creation and last sign-in dates. The sign-in provider also logs the IP address of sign-in requests, for security and abuse prevention.</td></tr>
+  <tr><th>Why</th><td>To let you sign in without a password, sync your followed games across devices and send you the emails you asked for: on the release day of a followed game and when its date changes or gets announced.</td></tr>
+  <tr><th>Legal basis</th><td>Performance of the service you request (Art. 6(1)(b) GDPR). No marketing, profiling or sharing with third parties.</td></tr>
+  <tr><th>Where</th><td>Supabase, Inc. (database and sign-in), with data stored in the European Union, Frankfurt. Brevo (Sendinblue SAS, France) for sending emails. Both act as data processors.</td></tr>
+  <tr><th>How long</th><td>As long as you keep the account. Accounts with no sign-in for 24 months are deleted.</td></tr>
+  <tr><th>Minimum age</th><td>14 years, as required in Italy for signing up to online services.</td></tr>
+</table>
+<p>Every email contains a one-click link to stop receiving alerts.</p>
+
+<h2>Your rights</h2>
+<p>You can access, correct, erase or restrict your data, object to its processing and receive it in a readable format. Two of these you can do yourself in the “My games” section: <b>Download my data</b> and <b>Delete account</b>, which immediately and permanently erases email, followed games and preferences. You also have the right to lodge a complaint with the Italian data protection authority (<a href="https://www.garanteprivacy.it" target="_blank" rel="noopener">Garante per la protezione dei dati personali</a>) or the authority of your country.</p>
+
+<h2>Content</h2>
+<p>Playrain excludes erotic or pornographic titles from its catalogue.</p>
+
+<h2>Sources and thanks</h2>
+<ul>
+  <li><b>IGDB.com</b>: titles, dates, platforms, genres, covers, press scores and popularity indicators come from <a href="https://www.igdb.com" target="_blank" rel="noopener">IGDB</a> through its official API, refreshed every night. Thanks to IGDB and its community for maintaining the catalogue.</li>
+  <li><b>Stores and official sites</b>: links lead to the public pages of Steam, PlayStation Store, Nintendo, Xbox and the developers.</li>
+  <li><b>Fonts</b>: Archivo, Fraunces and JetBrains Mono, under the SIL Open Font License.</li>
+</ul>
+<p>Release dates change often: Playrain reports them as published by IGDB and does not guarantee their accuracy. Playrain is not affiliated with IGDB, Twitch, the stores or the publishers. Game names, trademarks and covers belong to their respective owners and are shown only to identify the titles.</p>
+</div>
+</main>
+<script>
+(function(){
+  var L="it";
+  try{L=localStorage.getItem("playrain-lang")||"";}catch(e){}
+  if(L!=="it"&&L!=="en")L=/^it\b/i.test(navigator.language||"")?"it":"en";
+  document.documentElement.lang=L;
+  if(L==="en")document.title="Playrain — Privacy & sources";
+  var b=document.getElementById("lang");
+  b.textContent=L==="en"?"IT":"EN";
+  b.addEventListener("click",function(){
+    try{localStorage.setItem("playrain-lang",L==="en"?"it":"en");}catch(e){}
+    location.reload();
+  });
+})();
+</script>
+</body>
+</html>

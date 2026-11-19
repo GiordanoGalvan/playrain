@@ -29,16 +29,30 @@ jobs:
         env:
           TWITCH_CLIENT_ID: ${{ secrets.TWITCH_CLIENT_ID }}
           TWITCH_CLIENT_SECRET: ${{ secrets.TWITCH_CLIENT_SECRET }}
+          PLAYRAIN_SITO: ${{ vars.PLAYRAIN_SITO }}
         run: node scripts/sync.mjs
 
       - name: Committa se qualcosa è cambiato
         run: |
-          if [ -z "$(git status --porcelain data.json history.json)" ]; then
+          FILES="data.json history.json segnalati.json cambi.json calendario.ics"
+          if [ -z "$(git status --porcelain $FILES)" ]; then
             echo "Nessuna variazione."
             exit 0
           fi
           git config user.name "radar-bot"
           git config user.email "radar-bot@users.noreply.github.com"
-          git add data.json history.json
+          git add $FILES
           git commit -m "dati: aggiornamento $(date -u +%Y-%m-%d)"
           git push
+
+      # Gli avvisi partono dopo il commit: se l'invio fallisce, i dati del giorno
+      # sono gia' salvati. Finche' i segreti non ci sono, lo script lo dice e
+      # termina senza errore.
+      - name: Avvisi via mail
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
+          MAIL_FROM: ${{ vars.MAIL_FROM }}
+          PLAYRAIN_SITO: ${{ vars.PLAYRAIN_SITO }}
+        run: node scripts/notify.mjs

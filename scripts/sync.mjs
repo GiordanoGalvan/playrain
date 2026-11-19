@@ -17,10 +17,15 @@
 import { readFile, writeFile } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import path from "node:path";
+import { calcolaSegnalati } from "./segnalati.mjs";
+import { calendarioIcs } from "./ics.mjs";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
 const DATA = path.join(ROOT, "data.json");
 const HIST = path.join(ROOT, "history.json");
+const SEGN = path.join(ROOT, "segnalati.json");
+const CAMBI = path.join(ROOT, "cambi.json");
+const ICS = path.join(ROOT, "calendario.ics");
 
 const CLIENT_ID = process.env.TWITCH_CLIENT_ID;
 const CLIENT_SECRET = process.env.TWITCH_CLIENT_SECRET;
@@ -572,8 +577,18 @@ async function main() {
      ultime 24 ore — il 10 novembre erano 14, mentre in tredici giorni ne erano
      stati scoperti molti di piu'. Ora lo slittamento si eredita da un giro
      all'altro, con la data della scoperta, e resta per SLITTAMENTO_GIORNI. */
+  /* cambi.json: cosa e' cambiato in questo giro, per gli avvisi via mail.
+     "sposta" = la data c'era ed e' diversa; "fissa" = prima era vaga o da
+     definire e ora c'e' un giorno preciso. */
+  const cambi = { generated: OGGI, uscite: uscita.games.filter((g) => g.date === OGGI).map((g) => g.igdb), date: [] };
   if (prec) {
     const vecchi = new Map((prec.games || []).map((g) => [g.igdb, g]));
+    for (const g of uscita.games) {
+      const v = vecchi.get(g.igdb);
+      if (!v || !g.date) continue;
+      if (v.date && v.date !== g.date) cambi.date.push({ igdb: g.igdb, tipo: "sposta", da: v.date, a: g.date });
+      else if (!v.date) cambi.date.push({ igdb: g.igdb, tipo: "fissa", da: v.vague || null, a: g.date });
+    }
     const scade = iso(addDays(oggi, -SLITTAMENTO_GIORNI));
     let scoperti = 0, ereditati = 0;
     for (const g of uscita.games) {
@@ -591,6 +606,10 @@ async function main() {
 
   await writeFile(DATA, JSON.stringify(uscita));
   await writeFile(HIST, JSON.stringify(storico));
+  await writeFile(SEGN, JSON.stringify(calcolaSegnalati(uscita.games, storico, OGGI)));
+  await writeFile(CAMBI, JSON.stringify(cambi));
+  await writeFile(ICS, calendarioIcs(uscita.games, OGGI));
+  console.log(`cambi: ${cambi.uscite.length} uscite oggi, ${cambi.date.length} date cambiate o fissate`);
   console.log(`data.json: ${uscita.games.length} titoli`);
   console.log(`history.json: ${Object.keys(storico).length} serie, ${nuovi} punti nuovi`);
 }
