@@ -25,7 +25,7 @@ import path from "node:path";
 const ROOT = path.resolve(import.meta.dirname, "..");
 const env = process.env;
 const DRY = env.NOTIFY_DRY === "1";
-const SITO = (env.PLAYRAIN_SITO || "https://giordanogalvan.github.io/playrain/").replace(/\/?$/, "/");
+const SITO = (env.PLAYRAIN_SITO || "https://playrain.it/").replace(/\/?$/, "/");
 
 const mancano = ["SUPABASE_URL", "SUPABASE_SERVICE_KEY", ...(DRY ? [] : ["BREVO_API_KEY", "MAIL_FROM"])].filter((k) => !env[k]);
 if (mancano.length) {

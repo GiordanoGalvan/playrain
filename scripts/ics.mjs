@@ -13,7 +13,7 @@
 const SOGLIA_ATTESA = 40;
 const GIORNI = 180;
 const PIATT = { pc: "PC", switch2: "Switch 2", ps5: "PS5", xbox: "Xbox" };
-export const SITO = process.env.PLAYRAIN_SITO || "https://giordanogalvan.github.io/playrain/";
+export const SITO = process.env.PLAYRAIN_SITO || "https://playrain.it/";
 
 /* RFC 5545: virgole, punti e virgola e backslash vanno protetti; righe al
    massimo di 75 ottetti, continuate con uno spazio. */
