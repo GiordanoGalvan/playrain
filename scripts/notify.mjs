@@ -19,7 +19,7 @@
  *   NOTIFY_DRY=1           stampa le mail invece di mandarle.
  */
 
-import { readFile } from "node:fs/promises";
+import { readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
@@ -34,13 +34,27 @@ if (mancano.length) {
 }
 
 const cambi = JSON.parse(await readFile(path.join(ROOT, "cambi.json"), "utf8"));
+/* Una volta sola al giorno: se il giro viene ripetuto (a mano o per un nuovo
+   tentativo) gli avvisi di quel giorno sono gia' partiti. avvisi.json lo
+   ricorda e il workflow lo salva nel repository. */
+const REGISTRO = path.join(ROOT, "avvisi.json");
+let registro = {};
+try { registro = JSON.parse(await readFile(REGISTRO, "utf8")); } catch {}
+if (!DRY && registro.inviati === cambi.generated) {
+  console.log(`avvisi: gia' inviati per il ${cambi.generated}, salto.`);
+  process.exit(0);
+}
 const dati = JSON.parse(await readFile(path.join(ROOT, "data.json"), "utf8"));
 const giochi = new Map(dati.games.map((g) => [g.igdb, g]));
 
 const uscite = new Set(cambi.uscite || []);
 const date = new Map((cambi.date || []).map((c) => [c.igdb, c]));
 const ids = [...new Set([...uscite, ...date.keys()])];
-if (!ids.length) { console.log("avvisi: nessuna uscita o data cambiata oggi."); process.exit(0); }
+if (!ids.length) {
+  console.log("avvisi: nessuna uscita o data cambiata oggi.");
+  if (!DRY) await writeFile(REGISTRO, JSON.stringify({ inviati: cambi.generated, mail: 0 }) + "\n");
+  process.exit(0);
+}
 
 const r = await fetch(env.SUPABASE_URL.replace(/\/$/, "") + "/rest/v1/rpc/notify_targets", {
   method: "POST",
@@ -146,5 +160,6 @@ for (const p of perPersona.values()) {
   /* Brevo regge molto di piu', ma non serve correre. */
   await new Promise((ok) => setTimeout(ok, 120));
 }
+if (!DRY && (inviate || !errori)) await writeFile(REGISTRO, JSON.stringify({ inviati: cambi.generated, mail: inviate }) + "\n");
 console.log(`avvisi: ${inviate} mail inviate, ${saltate} senza novità, ${errori} errori (giochi coinvolti: ${ids.length})`);
 if (errori && !inviate) process.exit(1);

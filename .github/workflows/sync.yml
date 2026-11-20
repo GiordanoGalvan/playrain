@@ -64,3 +64,13 @@ jobs:
           MAIL_FROM: ${{ vars.MAIL_FROM }}
           PLAYRAIN_SITO: ${{ vars.PLAYRAIN_SITO }}
         run: node scripts/notify.mjs
+
+      - name: Ricorda gli avvisi inviati
+        run: |
+          if [ -n "$(git status --porcelain avvisi.json)" ]; then
+            git config user.name "radar-bot"
+            git config user.email "radar-bot@users.noreply.github.com"
+            git add avvisi.json
+            git commit -m "avvisi: inviati $(date -u +%Y-%m-%d)"
+            git push
+          fi
