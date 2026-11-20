@@ -909,7 +909,14 @@ var EN={
 "campanella":"bell",
 "Privacy e fonti":"Privacy & sources",
 "Calendario delle uscite più attese":"Calendar of the most anticipated releases",
-"Codice":"Source code"
+"Codice":"Source code",
+"Fatto: controlla la posta ({e}). Scrivi qui il codice che trovi nella mail, oppure apri il link in questo stesso browser.":"Done: check your inbox ({e}). Type here the code from the email, or open the link in this same browser.",
+"codice dalla mail":"code from the email",
+"Codice dalla mail":"Code from the email",
+"Entra con il codice":"Sign in with code",
+"Il codice è di almeno 6 cifre.":"The code has at least 6 digits.",
+"Verifica in corso…":"Checking…",
+"Codice non valido o scaduto: controlla o chiedine uno nuovo.":"Invalid or expired code: check it or request a new one."
 };
 var MESI_EN={gen:"Jan",feb:"Feb",mar:"Mar",apr:"Apr",mag:"May",giu:"Jun",lug:"Jul",ago:"Aug",set:"Sep",ott:"Oct",nov:"Nov",dic:"Dec"};
 function fill(t,v){return v?t.replace(/\{(\w+)\}/g,function(m,k){return v[k]!=null?v[k]:m;}):t;}
@@ -2070,6 +2077,24 @@ var Account=(function(){
       .then(function(){toast(T("Fatto: non riceverai più avvisi via mail."));})
       .catch(function(){toast(T("Disiscrizione non riuscita: riprova o scrivici."));});
   }
+  /* Il codice nella mail risolve il caso del link aperto in un altro browser:
+     il programma di posta apre i link dove vuole lui (un altro browser, il
+     telefono), e i giochi seguiti prima di entrare restano nel browser di
+     partenza. Scrivendo il codice qui, l'accesso avviene proprio in questo
+     browser e i giochi seguiti finiscono nell'account. */
+  function verificaCodice(email,codice){
+    function prova(tipo){
+      return api("/auth/v1/verify",{method:"POST",body:{type:tipo,email:email,token:codice}},false);
+    }
+    /* "email" vale per chi ha gia' un account; per chi si iscrive ora alcune
+       versioni di Supabase vogliono "signup". */
+    return prova("email").catch(function(){return prova("signup");}).then(function(j){
+      if(!j||!j.access_token)throw new Error("codice");
+      sess={access_token:j.access_token,refresh_token:j.refresh_token,expires_at:Date.now()+(j.expires_in||3600)*1000};
+      salva();
+      return carica().then(function(){toast(T("Accesso eseguito"));});
+    });
+  }
   function chiediLink(email){
     return api("/auth/v1/otp?redirect_to="+encodeURIComponent(SITO),{method:"POST",body:{email:email,create_user:true,data:{lang:LANG}}},false);
   }
@@ -2122,14 +2147,29 @@ var Account=(function(){
       '<div class="acct-row"><input type="email" id="ac-mail" class="qin notch-s" required autocomplete="email" placeholder="'+esc(T("la tua mail"))+'" aria-label="'+esc(T("Indirizzo mail"))+'">'+
       '<button type="submit" class="tool">'+T("Mandami il link")+'</button></div>'+
       '<label class="chk"><input type="checkbox" id="ac-ok" required> '+T("Ho almeno 14 anni e ho letto l'{a}informativa privacy{b}.",{a:'<a href="privacy.html" target="_blank">',b:'</a>'})+'</label>'+
-      '<p class="acct-msg" id="ac-msg" role="status"></p></form>';
+      '<p class="acct-msg" id="ac-msg" role="status"></p>'+
+      '<div class="acct-row" id="ac-code" hidden style="margin-top:10px"><input type="text" id="ac-tok" class="qin notch-s" inputmode="numeric" autocomplete="one-time-code" maxlength="10" placeholder="'+esc(T("codice dalla mail"))+'" aria-label="'+esc(T("Codice dalla mail"))+'">'+
+      '<button type="button" class="tool" id="ac-ver">'+T("Entra con il codice")+'</button></div></form>';
+    function usaCodice(){
+      var box=document.getElementById("ac-code"),c=document.getElementById("ac-tok").value.replace(/\D/g,""),msg=document.getElementById("ac-msg");
+      if(c.length<6){msg.textContent=T("Il codice è di almeno 6 cifre.");return;}
+      msg.textContent=T("Verifica in corso…");
+      verificaCodice(box.dataset.mail,c).catch(function(){msg.textContent=T("Codice non valido o scaduto: controlla o chiedine uno nuovo.");});
+    }
+    document.getElementById("ac-ver").addEventListener("click",usaCodice);
+    document.getElementById("ac-tok").addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();usaCodice();}});
     document.getElementById("ac-form").addEventListener("submit",function(e){
       e.preventDefault();
       var m=document.getElementById("ac-mail").value.trim(),ok=document.getElementById("ac-ok").checked,msg=document.getElementById("ac-msg");
       if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(m)){msg.textContent=T("Controlla l'indirizzo mail.");return;}
       if(!ok){msg.textContent=T("Per continuare conferma età e informativa.");return;}
       msg.textContent=T("Invio in corso…");
-      chiediLink(m).then(function(){msg.textContent=T("Fatto: controlla la posta ({e}) e apri il link da questo dispositivo.",{e:m});})
+      chiediLink(m).then(function(){
+          msg.textContent=T("Fatto: controlla la posta ({e}). Scrivi qui il codice che trovi nella mail, oppure apri il link in questo stesso browser.",{e:m});
+          var box=document.getElementById("ac-code");box.hidden=false;
+          document.getElementById("ac-tok").focus();
+          box.dataset.mail=m;
+        })
         .catch(function(err){msg.textContent=err.status===429?T("Troppe richieste: riprova fra qualche minuto."):T("Invio non riuscito: riprova fra poco.");});
     });
   }
