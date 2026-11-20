@@ -624,6 +624,49 @@ a.gcard:hover{background:var(--surf2);border-color:var(--line3)}
 .chk{display:flex;gap:8px;align-items:flex-start;font-family:var(--f-body);font-size:13px;color:var(--ink2);margin-top:10px}
 .chk a{color:var(--ink);text-decoration:underline}
 .acct-msg{font-family:var(--f-body);font-size:13px;color:var(--ink2);margin:10px 0 0;min-height:1em}
+.acbtn{display:inline-flex;align-items:center;gap:7px;margin-left:4px;padding:6px 11px;border:1px solid var(--line3);border-radius:2px;
+  background:none;color:var(--ink);font-family:var(--f-body);font-weight:600;font-size:12.5px;cursor:pointer;max-width:220px}
+.acbtn:hover{border-color:var(--ink3)}
+.acbtn svg{width:16px;height:16px;flex:none;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round}
+.acname{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.acbtn .caret{font-size:10px;color:var(--ink3)}
+.bar-in{position:relative}
+.umenu{position:absolute;right:max(16px,env(safe-area-inset-right,0px));top:calc(100% + 4px);z-index:60;width:min(320px,calc(100vw - 32px));
+  background:var(--bg);border:1px solid var(--line3);border-radius:3px;box-shadow:0 12px 40px rgba(0,0,0,.45);padding:8px 0}
+.um-head{padding:6px 14px 10px;font-family:var(--f-body);font-size:12.5px;color:var(--ink3);overflow-wrap:anywhere}
+.um-head b{color:var(--ink)}
+.um-it{display:flex;align-items:center;gap:9px;width:100%;padding:9px 14px;background:none;border:0;color:var(--ink);
+  font-family:var(--f-body);font-size:14px;text-align:left;cursor:pointer}
+.um-it:hover,.um-it:focus-visible{background:rgba(255,255,255,.06)}
+.um-it svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8}
+.um-it.danger{color:var(--coral)}
+.um-n{margin-left:auto;font-size:12px;color:var(--ink3)}
+.um-sep{height:1px;background:var(--line);margin:6px 0}
+.um-lab{padding:4px 14px 0;font-family:var(--f-body);font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink3)}
+.um-chk{margin:6px 14px 0}
+body.noscroll{overflow:hidden}
+.ovl{position:fixed;inset:0;z-index:70;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;padding:16px}
+.ovl[hidden]{display:none}
+.dlg{position:relative;width:min(520px,100%);max-height:calc(100dvh - 32px);overflow:auto;background:var(--bg);
+  border:1px solid var(--line3);border-radius:3px;box-shadow:0 20px 60px rgba(0,0,0,.5);padding:26px 22px 22px}
+.dlg.full{width:min(980px,100%);height:calc(100dvh - 32px)}
+.dlg:focus{outline:none}
+.dlg-x{position:absolute;top:8px;right:8px;width:36px;height:36px;border:0;background:none;color:var(--ink2);font-size:18px;cursor:pointer}
+.dlg-x:hover{color:var(--ink)}
+.dlg-t{font-size:24px;margin:0 0 10px;color:var(--ink)}
+.dlg-av{margin:0 0 12px;padding:9px 12px;border-left:3px solid var(--amber-sol);background:rgba(255,255,255,.04);
+  font-family:var(--f-body);font-size:14px;color:var(--ink)}
+.calbox{margin-top:26px;padding-top:18px;border-top:1px solid var(--line2)}
+.calbox h3{margin:0 0 6px;font-family:var(--f-body);font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink)}
+.cal-note{font-size:12.5px;margin-top:12px}
+a.tool{text-decoration:none;display:inline-block}
+.linkbtn{background:none;border:0;padding:0;color:var(--ink);text-decoration:underline;font:inherit;cursor:pointer}
+@media (max-width:760px){
+  .acbtn .acname,.acbtn .caret{display:none}
+  .acbtn{padding:6px 8px}
+  .ovl{padding:0;align-items:stretch}
+  .dlg,.dlg.full{width:100%;max-height:none;height:100dvh;border:0;border-radius:0;padding:52px 16px 24px}
+}
 .toast{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:80;
   background:var(--ink);color:var(--bg);font-family:var(--f-body);font-weight:600;font-size:13px;padding:9px 14px;border-radius:3px;
   max-width:min(92vw,520px);text-align:center;box-shadow:0 6px 24px rgba(0,0,0,.35)}
@@ -658,6 +701,8 @@ a.gcard:hover{background:var(--surf2);border-color:var(--line3)}
       </div>
     </div>
     <button type="button" class="pf-b notch-s" id="langbtn" lang="en">EN</button>
+    <button type="button" class="acbtn" id="acbtn" aria-expanded="false" hidden></button>
+    <div class="umenu" id="umenu" role="menu" hidden></div>
   </div>
 </div>
 
@@ -734,16 +779,6 @@ a.gcard:hover{background:var(--surf2);border-color:var(--line3)}
     <div id="growthbody"></div>
   </section>
 
-  <section class="sec" id="mine">
-    <div class="sech">
-      <h2>I MIEI GIOCHI</h2>
-      <span class="tag">campanella</span>
-      <span class="tag sech-end" id="minecount">—</span>
-    </div>
-    <div id="minebody"></div>
-    <div class="acct" id="acct"></div>
-  </section>
-
   <section class="sec" id="tba">
     <div class="sech">
       <h2 class="h2-frase">Date da definire</h2>
@@ -779,6 +814,12 @@ a.gcard:hover{background:var(--surf2);border-color:var(--line3)}
 </div>
 <div class="sweep" aria-hidden="true"></div>
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+<div class="ovl" id="ovl" hidden>
+  <div class="dlg" id="dlg" role="dialog" aria-modal="true" tabindex="-1">
+    <button type="button" class="dlg-x" id="dlgx" aria-label="Chiudi">✕</button>
+    <div id="dlgbody"></div>
+  </div>
+</div>
 
 <script>
 /* ---------------- lingua ----------------
@@ -916,7 +957,41 @@ var EN={
 "Entra con il codice":"Sign in with code",
 "Il codice è di almeno 6 cifre.":"The code has at least 6 digits.",
 "Verifica in corso…":"Checking…",
-"Codice non valido o scaduto: controlla o chiedine uno nuovo.":"Invalid or expired code: check it or request a new one."
+"Codice non valido o scaduto: controlla o chiedine uno nuovo.":"Invalid or expired code: check it or request a new one.",
+"Accedi":"Sign in",
+"Accedi a Playrain":"Sign in to Playrain",
+"Accedi per vedere i tuoi preferiti.":"Sign in to see your favourites.",
+"Aggiungi a Google Calendar":"Add to Google Calendar",
+"Aggiungi ai preferiti":"Add to favourites",
+"Aggiungi i tuoi preferiti a Google Calendar, al Calendario di iPhone o a Outlook. Si aggiornano da soli: un gioco nuovo nei preferiti, una data che slitta o un gioco tolto cambiano anche lì, entro qualche ora.":"Add your favourites to Google Calendar, the iPhone Calendar or Outlook. They update by themselves: a new favourite, a date that slips or a removed game change there too, within a few hours.",
+"Aggiunto ai preferiti":"Added to favourites",
+"Avvisi via mail":"Email alerts",
+"Cancellare l'account? Indirizzo mail, preferiti e impostazioni vengono eliminati subito e per sempre.":"Delete your account? Email address, favourites and settings are erased immediately and permanently.",
+"Ciao {n}: ora puoi usare la campanella.":"Hi {n}: you can now use the bell.",
+"Con l'account salvi i giochi preferiti, li ritrovi su ogni dispositivo, li aggiungi al tuo calendario e ricevi una mail quando escono o cambiano data. Niente password: ti mandiamo un codice.":"With an account you save your favourite games, find them on every device, add them to your calendar and get an email when they come out or change date. No password: we send you a code.",
+"Copia indirizzo (Outlook e altri)":"Copy address (Outlook and others)",
+"Creare un indirizzo nuovo? Dovrai aggiungere di nuovo il calendario nelle app dove l'avevi messo.":"Create a new address? You will need to add the calendar again in the apps where you had it.",
+"Entra":"Sign in",
+"Fatto: controlla la posta ({e}) e scrivi qui il codice. Puoi anche aprire il link della mail, ma in questo stesso browser.":"Done: check your inbox ({e}) and type the code here. You can also open the link in the email, but in this same browser.",
+"Il giorno dell'uscita":"On release day",
+"Indirizzo copiato: in Outlook scegli Aggiungi calendario → Sottoscrivi dal Web.":"Address copied: in Outlook choose Add calendar → Subscribe from web.",
+"Indirizzo non disponibile: riprova tra poco.":"Address not available: try again shortly.",
+"L'indirizzo è personale: chi lo conosce vede i tuoi preferiti. Se l'hai condiviso per errore, {a}crea un indirizzo nuovo{b}: quello vecchio smette di funzionare.":"The address is personal: whoever has it sees your favourites. If you shared it by mistake, {a}create a new address{b}: the old one stops working.",
+"Mandami il codice":"Send me the code",
+"Menu di {n}":"{n} menu",
+"Nel tuo calendario":"In your calendar",
+"Non hai ancora preferiti. Tocca la campanella accanto a un gioco per aggiungerlo: lo ritrovi qui, con la data aggiornata ogni notte.":"No favourites yet. Tap the bell next to a game to add it: you will find it here, with its date updated every night.",
+"Non riuscito: riprova.":"Failed: try again.",
+"Non sono riuscito a salvarlo: riprova.":"Couldn't save it: try again.",
+"Nuovo indirizzo creato.":"New address created.",
+"Per aggiungere un gioco ai preferiti devi prima accedere.":"To add a game to your favourites you need to sign in first.",
+"Preferiti":"Favourites",
+"Preparo il tuo indirizzo…":"Preparing your address…",
+"Se la data cambia o viene fissata":"If the date changes or gets announced",
+"Sei uscito. I tuoi preferiti restano salvati nell'account.":"Signed out. Your favourites stay saved in your account.",
+"Togli dai preferiti":"Remove from favourites",
+"Tolto dai preferiti":"Removed from favourites",
+"iPhone / Mac":"iPhone / Mac"
 };
 var MESI_EN={gen:"Jan",feb:"Feb",mar:"Mar",apr:"Apr",mag:"May",giu:"Jun",lug:"Jul",ago:"Aug",set:"Sep",ott:"Oct",nov:"Nov",dic:"Dec"};
 function fill(t,v){return v?t.replace(/\{(\w+)\}/g,function(m,k){return v[k]!=null?v[k]:m;}):t;}
@@ -1886,6 +1961,7 @@ function apriGiorno(ds){
   state.y=d.getFullYear();state.m=d.getMonth();
   state.sel=ds;state.moreOpen=false;
   panel.hidden=false;main.classList.add("open");
+  try{window.scrollTo({top:0,behavior:"smooth"});}catch(e){window.scrollTo(0,0);}
 }
 /* Legge l'indirizzo all'avvio e quando cambia: #d=, #m=, e i ritorni dal login
    e dalla disiscrizione, che arrivano anch'essi nel frammento. */
@@ -1895,43 +1971,102 @@ function leggiHash(){
   var p={};h.split("&").forEach(function(kv){var i=kv.indexOf("=");if(i>0)p[kv.slice(0,i)]=decodeURIComponent(kv.slice(i+1));});
   if(p.access_token||p.error_description){Account.daLink(p);return true;}
   if(p.unsub){Account.disiscrivi(p.unsub);return true;}
+  if(h==="preferiti"||h==="mine")return false;
   if(p.d&&/^\d{4}-\d{2}-\d{2}$/.test(p.d)&&!isNaN(pdate(p.d))){apriGiorno(p.d);return true;}
   if(p.m&&/^\d{4}-\d{2}$/.test(p.m)){state.y=+p.m.slice(0,4);state.m=+p.m.slice(5,7)-1;return true;}
   return false;
 }
-window.addEventListener("hashchange",function(){if(leggiHash()){paint();}});
+window.addEventListener("hashchange",function(){
+  if(/^#(preferiti|mine)$/.test(location.hash)){if(vistaAperta!=="preferiti")apriPreferiti();return;}
+  if(leggiHash()){paint();}
+});
 
-/* ================= Campanella: i giochi che segui =================
-   Funziona anche senza account: l'elenco resta in questo browser. Con l'account
-   si sincronizza fra dispositivi e attiva gli avvisi via mail. */
+/* ================= Preferiti (campanella) =================
+   I preferiti esistono solo con l'account: senza accesso la campanella invita a
+   entrare e non salva niente. Cosi' l'elenco non resta in un browser condiviso
+   e non si mescola fra persone diverse. Nel browser resta soltanto una copia
+   dei preferiti dell'account, per mostrarli subito al caricamento; all'uscita
+   si cancella. */
 var SEGUITI={};
-(function(){try{(JSON.parse(localStorage.getItem("playrain-seguiti")||"[]")).forEach(function(id){SEGUITI[id]=1;});}catch(e){}})();
-function salvaSeguiti(){try{localStorage.setItem("playrain-seguiti",JSON.stringify(Object.keys(SEGUITI).map(Number)));}catch(e){}}
+var CACHE_SEGUITI="playrain-cache-seguiti";
+function salvaSeguiti(){try{localStorage.setItem(CACHE_SEGUITI,JSON.stringify(Object.keys(SEGUITI).map(Number)));}catch(e){}}
+function svuotaSeguiti(){SEGUITI={};try{localStorage.removeItem(CACHE_SEGUITI);}catch(e){}}
 var BELL='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a6 6 0 0 0-6 6v3.5L4 16v1h16v-1l-2-3.5V9a6 6 0 0 0-6-6zm-2 15a2 2 0 0 0 4 0z"/></svg>';
 function bellBtn(g){
   if(!g.igdb)return"";
   var on=!!SEGUITI[g.igdb];
   return'<button type="button" class="bell'+(on?" on":"")+'" data-igdb="'+g.igdb+'" aria-pressed="'+on+'" title="'+
-    esc(on?T("Smetti di seguire"):T("Segui: avvisami dell'uscita"))+'" aria-label="'+esc((on?T("Smetti di seguire"):T("Segui"))+" — "+g.t)+'">'+BELL+'</button>';
+    esc(on?T("Togli dai preferiti"):T("Aggiungi ai preferiti"))+'" aria-label="'+esc((on?T("Togli dai preferiti"):T("Aggiungi ai preferiti"))+" — "+g.t)+'">'+BELL+'</button>';
+}
+function aggiornaCampanelle(){
+  [].forEach.call(document.querySelectorAll(".bell[data-igdb]"),function(b){
+    var on=!!SEGUITI[b.dataset.igdb];
+    b.classList.toggle("on",on);b.setAttribute("aria-pressed",String(on));
+    b.title=on?T("Togli dai preferiti"):T("Aggiungi ai preferiti");
+  });
 }
 function toggleSegui(id){
+  if(!Account.dentro()){apriLogin(T("Per aggiungere un gioco ai preferiti devi prima accedere."));return;}
   var on=!SEGUITI[id];
   if(on)SEGUITI[id]=1;else delete SEGUITI[id];
-  salvaSeguiti();
+  salvaSeguiti();aggiornaCampanelle();renderMine();
   Account.segui(id,on);
-  [].forEach.call(document.querySelectorAll('.bell[data-igdb="'+id+'"]'),function(b){
-    b.classList.toggle("on",on);b.setAttribute("aria-pressed",String(on));
-  });
-  renderMine();
-  toast(on?T("Lo segui: lo trovi in «I miei giochi»"):T("Non lo segui più"));
+  toast(on?T("Aggiunto ai preferiti"):T("Tolto dai preferiti"));
 }
 document.addEventListener("click",function(e){
   var b=e.target.closest(".bell");if(!b)return;
   e.preventDefault();e.stopPropagation();
   toggleSegui(+b.dataset.igdb);
 });
+
+/* ================= Finestre: accesso, menu utente, preferiti ================= */
+var ovl=document.getElementById("ovl"),dlg=document.getElementById("dlg"),dlgBody=document.getElementById("dlgbody");
+var umenu=document.getElementById("umenu"),acbtn=document.getElementById("acbtn");
+var focoPrima=null,vistaAperta=null;
+function apriDialogo(vista,html,piena){
+  focoPrima=document.activeElement;vistaAperta=vista;
+  dlgBody.innerHTML=html;
+  dlg.classList.toggle("full",!!piena);
+  ovl.hidden=false;document.body.classList.add("noscroll");
+  chiudiMenu();
+  var f=dlg.querySelector("input,button:not(.dlg-x),a");(f||dlg).focus();
+}
+function chiudiDialogo(){
+  if(ovl.hidden)return;
+  ovl.hidden=true;document.body.classList.remove("noscroll");vistaAperta=null;dlgBody.innerHTML="";
+  if(/^#(preferiti|mine)$/.test(location.hash))scriviHash(null);
+  if(focoPrima&&focoPrima.focus)focoPrima.focus();
+}
+document.getElementById("dlgx").addEventListener("click",chiudiDialogo);
+ovl.addEventListener("click",function(e){if(e.target===ovl)chiudiDialogo();});
+document.addEventListener("keydown",function(e){
+  if(e.key!=="Escape")return;
+  if(!umenu.hidden){chiudiMenu();acbtn.focus();return;}
+  if(!ovl.hidden)chiudiDialogo();
+});
+function chiudiMenu(){umenu.hidden=true;acbtn.setAttribute("aria-expanded","false");}
+acbtn.addEventListener("click",function(e){
+  e.stopPropagation();
+  if(!Account.dentro()){apriLogin();return;}
+  var aperto=!umenu.hidden;
+  if(aperto){chiudiMenu();return;}
+  Account.disegnaMenu();umenu.hidden=false;acbtn.setAttribute("aria-expanded","true");
+  var f=umenu.querySelector("button");if(f)f.focus();
+});
+document.addEventListener("click",function(e){if(!umenu.hidden&&!umenu.contains(e.target))chiudiMenu();});
+
+function apriLogin(avviso){Account.apriLogin(avviso);}
+function apriPreferiti(){
+  if(!Account.dentro()){apriLogin(T("Accedi per vedere i tuoi preferiti."));return;}
+  apriDialogo("preferiti",'<div id="minebox"></div>',true);
+  try{history.replaceState(history.state,"","#preferiti");}catch(e){}
+  renderMine();
+  Account.caricaCalendario();
+}
+
+/* La schermata "I miei giochi": elenco dei preferiti e calendario sincronizzato. */
 function renderMine(){
-  var box=document.getElementById("minebody");if(!box)return;
+  var box=document.getElementById("minebox");if(!box)return;
   var lista=Object.keys(SEGUITI).map(function(id){return BYID[id];}).filter(Boolean);
   /* Prima le date certe in ordine di uscita, poi quelle vaghe. */
   lista.sort(function(a,b){
@@ -1939,71 +2074,53 @@ function renderMine(){
     if(a.date)return -1;if(b.date)return 1;return a.t.localeCompare(b.t);
   });
   var mancanti=Object.keys(SEGUITI).length-lista.length;
-  document.getElementById("minecount").textContent=lista.length+(lista.length===1?T(" titolo"):T(" titoli"));
-  var h="";
+  var h='<div class="sech" style="margin-bottom:14px"><h2>'+T("I MIEI GIOCHI")+'</h2>'+
+    '<span class="tag sech-end">'+lista.length+(lista.length===1?T(" titolo"):T(" titoli"))+'</span></div>';
   if(!lista.length){
-    h+='<div class="empty" style="padding:16px">'+T("Tocca la campanella accanto a un gioco per seguirlo. Lo ritrovi qui, con la data aggiornata ogni notte.")+'</div>';
+    h+='<div class="empty" style="padding:16px 0">'+T("Non hai ancora preferiti. Tocca la campanella accanto a un gioco per aggiungerlo: lo ritrovi qui, con la data aggiornata ogni notte.")+'</div>';
   }else{
     h+='<div class="mine">'+lista.map(function(g){
       var quando=g.date?giornoLungo(g.date):TV(g.vague)||"TBA";
       var passato=g.date&&g.date<TODAY;
       return'<div class="mrow'+(passato?" past":"")+'">'+covImg(g,32,43,"t_cover_small")+
         '<span style="min-width:0"><span class="ot">'+esc(g.t)+'</span><span class="ometa">'+
-        (g.date?'<a href="#d='+g.date+'">'+esc(quando)+'</a>':esc(quando))+(g.was?' · ↺':'')+'</span></span>'+
+        (g.date?'<a href="#d='+g.date+'" data-chiudi>'+esc(quando)+'</a>':esc(quando))+(g.was?' · ↺':'')+'</span></span>'+
         bellBtn(g)+'</div>';
     }).join("")+'</div>';
-    h+='<div class="mtools"><button type="button" class="tool" id="icsbtn">'+T("Scarica nel calendario (.ics)")+'</button></div>';
   }
   if(mancanti>0)h+='<p class="secp" style="margin-top:10px">'+T("{n} titoli seguiti non sono più nel catalogo e non vengono mostrati.",{n:mancanti})+'</p>';
+  h+='<div class="calbox" id="calbox"><h3>'+T("Nel tuo calendario")+'</h3>'+
+    '<p class="secp">'+T("Aggiungi i tuoi preferiti a Google Calendar, al Calendario di iPhone o a Outlook. Si aggiornano da soli: un gioco nuovo nei preferiti, una data che slitta o un gioco tolto cambiano anche lì, entro qualche ora.")+'</p>'+
+    '<div id="calact"><p class="secp">'+T("Preparo il tuo indirizzo…")+'</p></div></div>';
   box.innerHTML=h;
-  var ib=document.getElementById("icsbtn");
-  if(ib)ib.addEventListener("click",function(){scaricaIcs(lista.filter(function(g){return g.date;}));});
+  Account.disegnaCalendario();
 }
-function icsEsc(s){return String(s).replace(/\\/g,"\\\\").replace(/;/g,"\\;").replace(/,/g,"\\,").replace(/\n/g,"\\n");}
-function scaricaIcs(lista){
-  if(!lista.length){toast(T("Nessun gioco seguito ha ancora una data precisa."));return;}
-  var stamp=TODAY.replace(/-/g,"")+"T000000Z";
-  var ev=lista.map(function(g){
-    var fine=addD(g.date,1).replace(/-/g,"");
-    return["BEGIN:VEVENT","UID:igdb-"+g.igdb+"@playrain","DTSTAMP:"+stamp,
-      "DTSTART;VALUE=DATE:"+g.date.replace(/-/g,""),"DTEND;VALUE=DATE:"+fine,
-      "SUMMARY:"+icsEsc(g.t+" — "+g.plat.map(function(p){return PLAT_TXT[p];}).join(", ")),
-      "URL:"+linkGiorno(g.date),"TRANSP:TRANSPARENT","END:VEVENT"].join("\r\n");
-  });
-  var txt=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Playrain//I miei giochi//IT","CALSCALE:GREGORIAN",
-    "X-WR-CALNAME:Playrain — "+T("I miei giochi")].concat(ev,["END:VCALENDAR",""]).join("\r\n");
-  var a=document.createElement("a");
-  a.href=URL.createObjectURL(new Blob([txt],{type:"text/calendar"}));
-  a.download="playrain-miei-giochi.ics";
-  document.body.appendChild(a);a.click();
-  setTimeout(function(){URL.revokeObjectURL(a.href);a.remove();},1000);
-}
+dlgBody.addEventListener("click",function(e){
+  var a=e.target.closest("a[data-chiudi]");if(a)chiudiDialogo();
+});
 document.getElementById("calsub").addEventListener("click",function(){
   copia(new URL("calendario.ics",SITO).href,T("Indirizzo del calendario copiato: incollalo in Google Calendar → Altri calendari → Da URL"));
 });
 
-/* ================= Account (facoltativo) =================
-   Serve solo per due cose: ritrovare i giochi seguiti su un altro dispositivo e
-   ricevere la mail il giorno dell'uscita o quando la data cambia. Niente
-   password: si entra con un link che arriva per mail. Il servizio e' Supabase,
-   con i dati nell'Unione europea (Irlanda). Si salvano l'indirizzo mail, i
-   giochi seguiti e le due preferenze di avviso. Niente altro.
+/* ================= Account =================
+   Serve per i preferiti (sincronizzati fra dispositivi), gli avvisi via mail e il
+   calendario personale. Niente password: si entra con un codice o un link che
+   arriva per mail. Il servizio e' Supabase, con i dati nell'Unione europea
+   (Irlanda). Si salvano l'indirizzo mail, i giochi preferiti, le due preferenze
+   di avviso e i codici segreti di disiscrizione e calendario. Niente altro.
 
-   Si parla con Supabase via fetch, senza la sua libreria: sono cinque chiamate
-   HTTP, e una dipendenza esterna caricata da un CDN manderebbe l'IP di ogni
-   visitatore a un terzo senza motivo.
-
-   Finche' CONFIG e' vuoto l'account resta spento e la campanella lavora solo
-   in locale. */
-/* Chiave "publishable": e' pubblica per progetto. A proteggere i dati sono le
-   regole RLS di supabase/schema.sql, non il segreto di questa chiave. */
+   Si parla con Supabase via fetch, senza la sua libreria: una dipendenza esterna
+   caricata da un CDN manderebbe l'IP di ogni visitatore a un terzo senza motivo. */
 /* Chiave "publishable": e' pubblica per progetto. A proteggere i dati sono le
    regole RLS di supabase/schema.sql, non il segreto di questa chiave. */
 var CONFIG={supabaseUrl:"https://rkwhittgtrkuxldfbszl.supabase.co",supabaseKey:"sb_publishable_apMAdgmRhB_udZ218QMLtw_HgPQK8s9"};
 var Account=(function(){
   var attivo=!!(CONFIG.supabaseUrl&&CONFIG.supabaseKey);
-  var sess=null,utente=null,prefs=null;
+  var sess=null,utente=null,prefs=null,calTok=null;
   try{sess=JSON.parse(localStorage.getItem("playrain-sess")||"null");}catch(e){}
+  /* Con una sessione salvata si mostrano subito i preferiti in copia locale,
+     poi carica() li sostituisce con quelli dell'account. */
+  if(sess){try{(JSON.parse(localStorage.getItem(CACHE_SEGUITI)||"[]")).forEach(function(id){SEGUITI[id]=1;});}catch(e){}}
   function salva(){try{if(sess)localStorage.setItem("playrain-sess",JSON.stringify(sess));else localStorage.removeItem("playrain-sess");}catch(e){}}
   function api(path,opt,conToken){
     opt=opt||{};
@@ -2025,7 +2142,7 @@ var Account=(function(){
       headers:{"apikey":CONFIG.supabaseKey,"Content-Type":"application/json"},body:JSON.stringify({refresh_token:sess.refresh_token})})
       .then(function(r){return r.ok?r.json():null;})
       .then(function(j){
-        if(!j||!j.access_token){sess=null;utente=null;salva();disegna();return false;}
+        if(!j||!j.access_token){fuori();return false;}
         sess={access_token:j.access_token,refresh_token:j.refresh_token,expires_at:Date.now()+(j.expires_in||3600)*1000};
         salva();return true;
       }).catch(function(){return false;});
@@ -2035,121 +2152,157 @@ var Account=(function(){
     if(Date.now()>sess.expires_at-60000)return rinnova();
     return Promise.resolve(true);
   }
+  /* Stato "fuori": niente sessione, niente preferiti nel browser. */
+  function fuori(){
+    sess=null;utente=null;prefs=null;calTok=null;salva();svuotaSeguiti();
+    aggiornaCampanelle();disegnaBottone();
+    if(vistaAperta==="preferiti")chiudiDialogo();
+  }
   function carica(){
     return pronto().then(function(ok){
-      if(!ok){disegna();return;}
+      if(!ok){if(sess)fuori();disegnaBottone();return;}
       return api("/auth/v1/user",{},true).then(function(u){
         utente=u;
-        return api("/rest/v1/profiles?select=notify_release,notify_change,lang",{},true);
+        return api("/rest/v1/profiles?select=notify_release,notify_change,lang,calendar_token",{},true);
       }).then(function(p){
         prefs=p&&p[0]||{notify_release:true,notify_change:true,lang:LANG};
+        calTok=prefs.calendar_token||null;
         if(prefs.lang!==LANG)api("/rest/v1/profiles?user_id=eq."+utente.id,{method:"PATCH",body:{lang:LANG}},true).catch(function(){});
         return api("/rest/v1/follows?select=igdb",{},true);
       }).then(function(rows){
-        /* Unione, non sostituzione: chi ha seguito giochi prima di entrare non
-           li perde, e quelli dell'account arrivano anche su questo dispositivo. */
-        var remoti={};(rows||[]).forEach(function(r){remoti[r.igdb]=1;});
-        var daMandare=Object.keys(SEGUITI).filter(function(id){return !remoti[id];});
-        Object.keys(remoti).forEach(function(id){SEGUITI[id]=1;});
-        salvaSeguiti();renderMine();
-        if(daMandare.length)return api("/rest/v1/follows",{method:"POST",headers:{"Prefer":"resolution=ignore-duplicates,return=minimal"},
-          body:daMandare.map(function(id){return{igdb:+id};})},true);
-      }).then(disegna).catch(function(e){console.warn("account:",e.message);disegna();});
+        SEGUITI={};(rows||[]).forEach(function(r){SEGUITI[r.igdb]=1;});
+        /* Una volta sola: chi aveva usato la campanella senza account nella
+           versione precedente del sito ritrova quei giochi nell'account. */
+        var vecchi=[];
+        try{vecchi=JSON.parse(localStorage.getItem("playrain-seguiti")||"[]");localStorage.removeItem("playrain-seguiti");}catch(e){}
+        var nuovi=vecchi.filter(function(id){return !SEGUITI[id];});
+        nuovi.forEach(function(id){SEGUITI[id]=1;});
+        salvaSeguiti();aggiornaCampanelle();renderMine();disegnaBottone();
+        if(nuovi.length)return api("/rest/v1/follows",{method:"POST",headers:{"Prefer":"resolution=ignore-duplicates,return=minimal"},
+          body:nuovi.map(function(id){return{igdb:+id};})},true);
+      }).catch(function(e){console.warn("account:",e.message);disegnaBottone();});
     });
   }
   function segui(id,on){
-    if(!attivo||!sess||!utente)return;
+    if(!sess)return;
     var p=on?api("/rest/v1/follows",{method:"POST",headers:{"Prefer":"resolution=ignore-duplicates,return=minimal"},body:[{igdb:id}]},true)
             :api("/rest/v1/follows?igdb=eq."+id,{method:"DELETE"},true);
-    p.catch(function(){toast(T("Non sono riuscito a salvarlo sull'account: riprovo al prossimo accesso."));});
+    p.catch(function(){
+      if(on)delete SEGUITI[id];else SEGUITI[id]=1;
+      salvaSeguiti();aggiornaCampanelle();renderMine();
+      toast(T("Non sono riuscito a salvarlo: riprova."));
+    });
+  }
+  function entra(j){
+    sess={access_token:j.access_token,refresh_token:j.refresh_token,expires_at:Date.now()+(+j.expires_in||3600)*1000};
+    salva();
+    return carica().then(function(){
+      chiudiDialogo();
+      toast(utente?T("Ciao {n}: ora puoi usare la campanella.",{n:nomeUtente()}):T("Accesso eseguito"));
+    });
   }
   function daLink(p){
     try{history.replaceState(history.state,"",location.pathname+location.search);}catch(e){}
     if(p.error_description){toast(T("Link di accesso non valido o scaduto: richiedine uno nuovo."));return;}
-    sess={access_token:p.access_token,refresh_token:p.refresh_token,expires_at:Date.now()+(+p.expires_in||3600)*1000};
-    salva();
-    carica().then(function(){toast(T("Accesso eseguito"));location.hash="#mine";});
+    entra(p);
   }
   function disiscrivi(tok){
     try{history.replaceState(history.state,"",location.pathname+location.search);}catch(e){}
-    if(!attivo)return;
     api("/rest/v1/rpc/unsubscribe",{method:"POST",body:{t:tok}},false)
       .then(function(){toast(T("Fatto: non riceverai più avvisi via mail."));})
       .catch(function(){toast(T("Disiscrizione non riuscita: riprova o scrivici."));});
   }
-  /* Il codice nella mail risolve il caso del link aperto in un altro browser:
-     il programma di posta apre i link dove vuole lui (un altro browser, il
-     telefono), e i giochi seguiti prima di entrare restano nel browser di
-     partenza. Scrivendo il codice qui, l'accesso avviene proprio in questo
-     browser e i giochi seguiti finiscono nell'account. */
+  /* Il codice nella mail evita il caso del link aperto in un altro browser (il
+     programma di posta apre i link dove vuole): scrivendolo qui si entra proprio
+     in questo browser. */
   function verificaCodice(email,codice){
-    function prova(tipo){
-      return api("/auth/v1/verify",{method:"POST",body:{type:tipo,email:email,token:codice}},false);
-    }
+    function prova(tipo){return api("/auth/v1/verify",{method:"POST",body:{type:tipo,email:email,token:codice}},false);}
     /* "email" vale per chi ha gia' un account; per chi si iscrive ora alcune
        versioni di Supabase vogliono "signup". */
     return prova("email").catch(function(){return prova("signup");}).then(function(j){
       if(!j||!j.access_token)throw new Error("codice");
-      sess={access_token:j.access_token,refresh_token:j.refresh_token,expires_at:Date.now()+(j.expires_in||3600)*1000};
-      salva();
-      return carica().then(function(){toast(T("Accesso eseguito"));});
+      return entra(j);
     });
   }
-  function chiediLink(email){
+  function chiediCodice(email){
     return api("/auth/v1/otp?redirect_to="+encodeURIComponent(SITO),{method:"POST",body:{email:email,create_user:true,data:{lang:LANG}}},false);
   }
   function esci(){
     var p=sess?api("/auth/v1/logout",{method:"POST"},true).catch(function(){}):Promise.resolve();
-    return p.then(function(){sess=null;utente=null;prefs=null;salva();disegna();toast(T("Sei uscito. I giochi seguiti restano su questo dispositivo."));});
+    chiudiMenu();
+    return p.then(function(){fuori();toast(T("Sei uscito. I tuoi preferiti restano salvati nell'account."));});
   }
   function esporta(){
-    var dati={email:utente&&utente.email,creato:utente&&utente.created_at,preferenze:prefs,
-      seguiti:Object.keys(SEGUITI).map(function(id){var g=BYID[id];return{igdb:+id,titolo:g?g.t:null};})};
+    var dati={email:utente&&utente.email,creato:utente&&utente.created_at,
+      preferenze:prefs&&{mail_uscita:prefs.notify_release,mail_cambio_data:prefs.notify_change,lingua:prefs.lang},
+      preferiti:Object.keys(SEGUITI).map(function(id){var g=BYID[id];return{igdb:+id,titolo:g?g.t:null};})};
     var a=document.createElement("a");
     a.href=URL.createObjectURL(new Blob([JSON.stringify(dati,null,2)],{type:"application/json"}));
     a.download="playrain-i-miei-dati.json";document.body.appendChild(a);a.click();
     setTimeout(function(){URL.revokeObjectURL(a.href);a.remove();},1000);
   }
   function cancella(){
-    if(!window.confirm(T("Cancellare l'account? Indirizzo mail, giochi seguiti e preferenze vengono eliminati subito e per sempre.")))return;
+    chiudiMenu();
+    if(!window.confirm(T("Cancellare l'account? Indirizzo mail, preferiti e impostazioni vengono eliminati subito e per sempre.")))return;
     api("/rest/v1/rpc/delete_me",{method:"POST",body:{}},true).then(function(){
-      sess=null;utente=null;prefs=null;salva();disegna();toast(T("Account cancellato."));
+      fuori();toast(T("Account cancellato."));
     }).catch(function(){toast(T("Cancellazione non riuscita: riprova tra poco."));});
   }
   function salvaPref(campo,val){
     prefs[campo]=val;
-    api("/rest/v1/profiles?user_id=eq."+utente.id,{method:"PATCH",body:(function(){var o={};o[campo]=val;return o;})()},true)
+    var o={};o[campo]=val;
+    api("/rest/v1/profiles?user_id=eq."+utente.id,{method:"PATCH",body:o},true)
       .then(function(){toast(T("Preferenza salvata"));})
-      .catch(function(){toast(T("Non salvato: riprova."));});
+      .catch(function(){prefs[campo]=!val;disegnaMenu();toast(T("Non salvato: riprova."));});
   }
-  function disegna(){
-    var box=document.getElementById("acct");if(!box)return;
-    if(!attivo){
-      box.innerHTML='<p class="secp" style="margin:0">'+T("Gli avvisi via mail arrivano a breve. Intanto la campanella funziona su questo dispositivo.")+'</p>';
-      return;
+  /* Il nome mostrato e' la parte della mail prima della @: niente dati in piu'
+     da chiedere. */
+  function nomeUtente(){return utente&&utente.email?utente.email.split("@")[0]:"";}
+
+  var ICO_UTENTE='<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8.5" r="4"/><path d="M4 20c1.5-3.8 4.6-5.5 8-5.5s6.5 1.7 8 5.5"/></svg>';
+  function disegnaBottone(){
+    if(!attivo){acbtn.hidden=true;return;}
+    acbtn.hidden=false;
+    if(sess){
+      acbtn.innerHTML=ICO_UTENTE+'<span class="acname">'+esc(nomeUtente())+'</span><span class="caret" aria-hidden="true">▾</span>';
+      acbtn.setAttribute("aria-haspopup","menu");acbtn.setAttribute("aria-label",T("Menu di {n}",{n:nomeUtente()}));
+    }else{
+      acbtn.innerHTML=ICO_UTENTE+'<span class="acname">'+T("Accedi")+'</span>';
+      acbtn.removeAttribute("aria-haspopup");acbtn.setAttribute("aria-label",T("Accedi"));
+      chiudiMenu();
     }
-    if(sess&&utente){
-      box.innerHTML='<div class="acct-in"><p class="secp" style="margin:0">'+T("Accesso come {e}",{e:'<b>'+esc(utente.email)+'</b>'})+'</p>'+
-        '<label class="chk"><input type="checkbox" id="pr-rel"'+(prefs&&prefs.notify_release?" checked":"")+'> '+T("Mail il giorno dell'uscita")+'</label>'+
-        '<label class="chk"><input type="checkbox" id="pr-chg"'+(prefs&&prefs.notify_change?" checked":"")+'> '+T("Mail se la data cambia o viene fissata")+'</label>'+
-        '<div class="mtools"><button type="button" class="tool" id="ac-out">'+T("Esci")+'</button>'+
-        '<button type="button" class="tool" id="ac-exp">'+T("Scarica i miei dati")+'</button>'+
-        '<button type="button" class="tool danger" id="ac-del">'+T("Cancella account")+'</button></div></div>';
-      document.getElementById("pr-rel").addEventListener("change",function(){salvaPref("notify_release",this.checked);});
-      document.getElementById("pr-chg").addEventListener("change",function(){salvaPref("notify_change",this.checked);});
-      document.getElementById("ac-out").addEventListener("click",esci);
-      document.getElementById("ac-exp").addEventListener("click",esporta);
-      document.getElementById("ac-del").addEventListener("click",cancella);
-      return;
-    }
-    box.innerHTML='<form class="acct-form" id="ac-form" novalidate>'+
-      '<p class="secp" style="margin:0 0 8px">'+T("Vuoi una mail quando esce un gioco che segui, o quando cambia data? Entra con il tuo indirizzo: niente password, ti mandiamo un link.")+'</p>'+
+  }
+  function disegnaMenu(){
+    umenu.innerHTML='<div class="um-head">'+T("Accesso come {e}",{e:'<b>'+esc(utente.email)+'</b>'})+'</div>'+
+      '<button type="button" class="um-it" id="um-pref" role="menuitem">'+BELL+T("Preferiti")+'<span class="um-n">'+Object.keys(SEGUITI).length+'</span></button>'+
+      '<div class="um-sep"></div><div class="um-lab">'+T("Avvisi via mail")+'</div>'+
+      '<label class="chk um-chk"><input type="checkbox" id="pr-rel"'+(prefs&&prefs.notify_release?" checked":"")+'> '+T("Il giorno dell'uscita")+'</label>'+
+      '<label class="chk um-chk"><input type="checkbox" id="pr-chg"'+(prefs&&prefs.notify_change?" checked":"")+'> '+T("Se la data cambia o viene fissata")+'</label>'+
+      '<div class="um-sep"></div>'+
+      '<button type="button" class="um-it" id="um-exp" role="menuitem">'+T("Scarica i miei dati")+'</button>'+
+      '<button type="button" class="um-it danger" id="um-del" role="menuitem">'+T("Cancella account")+'</button>'+
+      '<button type="button" class="um-it" id="um-out" role="menuitem">'+T("Esci")+'</button>';
+    document.getElementById("um-pref").addEventListener("click",function(){chiudiMenu();apriPreferiti();});
+    document.getElementById("pr-rel").addEventListener("change",function(){salvaPref("notify_release",this.checked);});
+    document.getElementById("pr-chg").addEventListener("change",function(){salvaPref("notify_change",this.checked);});
+    document.getElementById("um-exp").addEventListener("click",function(){chiudiMenu();esporta();});
+    document.getElementById("um-del").addEventListener("click",cancella);
+    document.getElementById("um-out").addEventListener("click",esci);
+  }
+
+  function apriLogin(avviso){
+    if(!attivo)return;
+    apriDialogo("login",
+      '<h2 class="dlg-t">'+T("Accedi a Playrain")+'</h2>'+
+      (avviso?'<p class="dlg-av">'+esc(avviso)+'</p>':'')+
+      '<p class="secp" style="margin:0 0 12px">'+T("Con l'account salvi i giochi preferiti, li ritrovi su ogni dispositivo, li aggiungi al tuo calendario e ricevi una mail quando escono o cambiano data. Niente password: ti mandiamo un codice.")+'</p>'+
+      '<form id="ac-form" novalidate>'+
       '<div class="acct-row"><input type="email" id="ac-mail" class="qin notch-s" required autocomplete="email" placeholder="'+esc(T("la tua mail"))+'" aria-label="'+esc(T("Indirizzo mail"))+'">'+
-      '<button type="submit" class="tool">'+T("Mandami il link")+'</button></div>'+
+      '<button type="submit" class="tool">'+T("Mandami il codice")+'</button></div>'+
       '<label class="chk"><input type="checkbox" id="ac-ok" required> '+T("Ho almeno 14 anni e ho letto l'{a}informativa privacy{b}.",{a:'<a href="privacy.html" target="_blank">',b:'</a>'})+'</label>'+
       '<p class="acct-msg" id="ac-msg" role="status"></p>'+
       '<div class="acct-row" id="ac-code" hidden style="margin-top:10px"><input type="text" id="ac-tok" class="qin notch-s" inputmode="numeric" autocomplete="one-time-code" maxlength="10" placeholder="'+esc(T("codice dalla mail"))+'" aria-label="'+esc(T("Codice dalla mail"))+'">'+
-      '<button type="button" class="tool" id="ac-ver">'+T("Entra con il codice")+'</button></div></form>';
+      '<button type="button" class="tool" id="ac-ver">'+T("Entra")+'</button></div></form>');
     function usaCodice(){
       var box=document.getElementById("ac-code"),c=document.getElementById("ac-tok").value.replace(/\D/g,""),msg=document.getElementById("ac-msg");
       if(c.length<6){msg.textContent=T("Il codice è di almeno 6 cifre.");return;}
@@ -2164,16 +2317,45 @@ var Account=(function(){
       if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(m)){msg.textContent=T("Controlla l'indirizzo mail.");return;}
       if(!ok){msg.textContent=T("Per continuare conferma età e informativa.");return;}
       msg.textContent=T("Invio in corso…");
-      chiediLink(m).then(function(){
-          msg.textContent=T("Fatto: controlla la posta ({e}). Scrivi qui il codice che trovi nella mail, oppure apri il link in questo stesso browser.",{e:m});
-          var box=document.getElementById("ac-code");box.hidden=false;
+      chiediCodice(m).then(function(){
+          msg.textContent=T("Fatto: controlla la posta ({e}) e scrivi qui il codice. Puoi anche aprire il link della mail, ma in questo stesso browser.",{e:m});
+          var box=document.getElementById("ac-code");box.hidden=false;box.dataset.mail=m;
           document.getElementById("ac-tok").focus();
-          box.dataset.mail=m;
         })
         .catch(function(err){msg.textContent=err.status===429?T("Troppe richieste: riprova fra qualche minuto."):T("Invio non riuscito: riprova fra poco.");});
     });
   }
-  return{attivo:attivo,carica:carica,segui:segui,daLink:daLink,disiscrivi:disiscrivi,disegna:disegna};
+
+  /* ---- calendario personale ---- */
+  function urlCalendario(){return calTok?CONFIG.supabaseUrl+"/functions/v1/calendario?t="+calTok:"";}
+  function caricaCalendario(){
+    if(calTok||!sess){disegnaCalendario();return;}
+    api("/rest/v1/profiles?select=calendar_token",{},true).then(function(p){
+      calTok=p&&p[0]&&p[0].calendar_token;disegnaCalendario();
+    }).catch(disegnaCalendario);
+  }
+  function disegnaCalendario(){
+    var box=document.getElementById("calact");if(!box)return;
+    var u=urlCalendario();
+    if(!u){box.innerHTML='<p class="secp">'+T("Indirizzo non disponibile: riprova tra poco.")+'</p>';return;}
+    var webcal=u.replace(/^https:/,"webcal:");
+    box.innerHTML='<div class="mtools" style="margin-top:4px">'+
+      '<a class="tool" target="_blank" rel="noopener" href="https://calendar.google.com/calendar/render?cid='+encodeURIComponent(webcal)+'">'+T("Aggiungi a Google Calendar")+'</a>'+
+      '<a class="tool" href="'+esc(webcal)+'">'+T("iPhone / Mac")+'</a>'+
+      '<button type="button" class="tool" id="cal-copy">'+T("Copia indirizzo (Outlook e altri)")+'</button></div>'+
+      '<p class="secp cal-note">'+T("L'indirizzo è personale: chi lo conosce vede i tuoi preferiti. Se l'hai condiviso per errore, {a}crea un indirizzo nuovo{b}: quello vecchio smette di funzionare.",{a:'<button type="button" class="linkbtn" id="cal-new">',b:'</button>'})+'</p>';
+    document.getElementById("cal-copy").addEventListener("click",function(){copia(u,T("Indirizzo copiato: in Outlook scegli Aggiungi calendario → Sottoscrivi dal Web."));});
+    document.getElementById("cal-new").addEventListener("click",function(){
+      if(!window.confirm(T("Creare un indirizzo nuovo? Dovrai aggiungere di nuovo il calendario nelle app dove l'avevi messo.")))return;
+      api("/rest/v1/rpc/rigenera_calendario",{method:"POST",body:{}},true).then(function(t){
+        calTok=t;disegnaCalendario();toast(T("Nuovo indirizzo creato."));
+      }).catch(function(){toast(T("Non riuscito: riprova."));});
+    });
+  }
+
+  return{attivo:attivo,carica:carica,segui:segui,daLink:daLink,disiscrivi:disiscrivi,
+    dentro:function(){return !!sess;},disegnaBottone:disegnaBottone,disegnaMenu:disegnaMenu,
+    apriLogin:apriLogin,caricaCalendario:caricaCalendario,disegnaCalendario:disegnaCalendario};
 })();
 
 /* ---------------- init ---------------- */
@@ -2224,8 +2406,9 @@ Promise.all([grab("data.json"),grab("segnalati.json")]).then(function(res){
   }
   if(!leggiHash())apriOggi();
   paint();
-  Account.disegna();
+  Account.disegnaBottone();
   if(Account.attivo)Account.carica();
+  if(/^#(preferiti|mine)$/.test(location.hash))apriPreferiti();
   allaMezzanotte();
 });
 })();

@@ -152,3 +152,53 @@ begin
 end $$;
 revoke all on function public.pulisci_inattivi() from public, anon, authenticated;
 grant execute on function public.pulisci_inattivi() to service_role;
+
+-- =================================================================== v2
+-- Calendario personale sincronizzato (20/11/2026).
+--
+-- Ogni utente ha un indirizzo segreto di calendario (.ics) da aggiungere a
+-- Google Calendar, iPhone o Outlook: dentro ci sono i giochi che segue, con la
+-- data aggiornata ogni notte. L'indirizzo lo serve la Edge Function
+-- "calendario" (supabase/functions/calendario), che chiama calendario_utente().
+
+-- Codice segreto dell'indirizzo del calendario. Diverso dal gettone di
+-- disiscrizione: chi lo conosce vede solo i titoli seguiti, e l'utente puo'
+-- rigenerarlo se lo ha condiviso per errore.
+alter table public.profiles
+  add column if not exists calendar_token uuid not null default gen_random_uuid();
+create unique index if not exists profiles_calendar_token on public.profiles (calendar_token);
+
+-- Giochi con data precisa, caricati ogni notte da scripts/supabase-giochi.mjs con
+-- la chiave di servizio. Nessun accesso diretto per anon o utenti: si leggono
+-- solo attraverso calendario_utente().
+create table if not exists public.games (
+  igdb       integer primary key,
+  titolo     text not null,
+  data       date not null,
+  piattaforme text not null default '',
+  aggiornato date not null default current_date
+);
+alter table public.games enable row level security;
+revoke all on public.games from anon, authenticated;
+
+create or replace function public.calendario_utente(t uuid)
+returns table (igdb integer, titolo text, data date, piattaforme text, lang text)
+language sql stable security definer set search_path = '' as $$
+  select g.igdb, g.titolo, g.data, g.piattaforme, p.lang
+  from public.profiles p
+  join public.follows f on f.user_id = p.user_id
+  join public.games g on g.igdb = f.igdb
+  where p.calendar_token = t;
+$$;
+revoke all on function public.calendario_utente(uuid) from public;
+grant execute on function public.calendario_utente(uuid) to anon, authenticated, service_role;
+
+-- "Rigenera indirizzo": il vecchio smette di funzionare subito.
+create or replace function public.rigenera_calendario()
+returns uuid language sql security definer set search_path = '' as $$
+  update public.profiles set calendar_token = gen_random_uuid()
+  where user_id = auth.uid()
+  returning calendar_token;
+$$;
+revoke all on function public.rigenera_calendario() from public, anon;
+grant execute on function public.rigenera_calendario() to authenticated;

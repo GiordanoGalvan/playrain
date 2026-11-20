@@ -48,6 +48,14 @@ jobs:
       # Gli avvisi partono dopo il commit: se l'invio fallisce, i dati del giorno
       # sono gia' salvati. Finche' i segreti non ci sono, lo script lo dice e
       # termina senza errore.
+      - name: Giochi su Supabase (calendario personale)
+        # Se fallisce, gli avvisi partono lo stesso.
+        continue-on-error: true
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+        run: node scripts/supabase-giochi.mjs
+
       - name: Avvisi via mail
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
