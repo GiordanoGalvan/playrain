@@ -624,6 +624,14 @@ a.gcard:hover{background:var(--surf2);border-color:var(--line3)}
 .chk{display:flex;gap:8px;align-items:flex-start;font-family:var(--f-body);font-size:13px;color:var(--ink2);margin-top:10px}
 .chk a{color:var(--ink);text-decoration:underline}
 .acct-msg{font-family:var(--f-body);font-size:13px;color:var(--ink2);margin:10px 0 0;min-height:1em}
+.acgrp{display:inline-flex;align-items:center;gap:8px;white-space:nowrap}
+.favbtn{display:inline-flex;align-items:center;gap:7px;padding:6px 11px;border:1px solid var(--amber-sol);border-radius:2px;
+  background:none;color:var(--ink);font-family:var(--f-body);font-weight:600;font-size:12.5px;cursor:pointer}
+.favbtn svg{width:15px;height:15px;fill:var(--amber-sol);stroke:var(--amber-sol);stroke-width:1.6}
+.favbtn:hover{background:rgba(255,255,255,.05)}
+.favn{min-width:18px;padding:1px 5px;border-radius:9px;background:var(--amber-sol);color:var(--amber-ink);font-size:11px;text-align:center}
+.favbtn[hidden],.acbtn[hidden]{display:none}
+@media (max-width:760px){.favtxt{display:none}.favbtn{padding:6px 8px}}
 .acbtn{display:inline-flex;align-items:center;gap:7px;margin-left:4px;padding:6px 11px;border:1px solid var(--line3);border-radius:2px;
   background:none;color:var(--ink);font-family:var(--f-body);font-weight:600;font-size:12.5px;cursor:pointer;max-width:220px}
 .acbtn:hover{border-color:var(--ink3)}
@@ -701,7 +709,7 @@ a.tool{text-decoration:none;display:inline-block}
       </div>
     </div>
     <button type="button" class="pf-b notch-s" id="langbtn" lang="en">EN</button>
-    <button type="button" class="acbtn" id="acbtn" aria-expanded="false" hidden></button>
+    <span class="acgrp"><button type="button" class="favbtn" id="favbtn" hidden></button><button type="button" class="acbtn" id="acbtn" aria-expanded="false" hidden></button></span>
     <div class="umenu" id="umenu" role="menu" hidden></div>
   </div>
 </div>
@@ -1999,6 +2007,7 @@ function bellBtn(g){
     esc(on?T("Togli dai preferiti"):T("Aggiungi ai preferiti"))+'" aria-label="'+esc((on?T("Togli dai preferiti"):T("Aggiungi ai preferiti"))+" — "+g.t)+'">'+BELL+'</button>';
 }
 function aggiornaCampanelle(){
+  if(typeof disegnaFav==="function")disegnaFav();
   [].forEach.call(document.querySelectorAll(".bell[data-igdb]"),function(b){
     var on=!!SEGUITI[b.dataset.igdb];
     b.classList.toggle("on",on);b.setAttribute("aria-pressed",String(on));
@@ -2009,7 +2018,7 @@ function toggleSegui(id){
   if(!Account.dentro()){apriLogin(T("Per aggiungere un gioco ai preferiti devi prima accedere."));return;}
   var on=!SEGUITI[id];
   if(on)SEGUITI[id]=1;else delete SEGUITI[id];
-  salvaSeguiti();aggiornaCampanelle();renderMine();
+  salvaSeguiti();aggiornaCampanelle();renderMine();disegnaFav();
   Account.segui(id,on);
   toast(on?T("Aggiunto ai preferiti"):T("Tolto dai preferiti"));
 }
@@ -2056,6 +2065,17 @@ acbtn.addEventListener("click",function(e){
 document.addEventListener("click",function(e){if(!umenu.hidden&&!umenu.contains(e.target))chiudiMenu();});
 
 function apriLogin(avviso){Account.apriLogin(avviso);}
+/* Pulsante "Preferiti" nella barra, visibile solo con l'accesso, con il numero
+   dei giochi: e' la porta principale verso "I miei giochi". */
+var favbtn=document.getElementById("favbtn");
+function disegnaFav(){
+  if(!Account.dentro()){favbtn.hidden=true;return;}
+  var n=Object.keys(SEGUITI).length;
+  favbtn.hidden=false;
+  favbtn.innerHTML=BELL+'<span class="favtxt">'+T("Preferiti")+'</span><span class="favn">'+n+'</span>';
+  favbtn.setAttribute("aria-label",T("Preferiti")+" ("+n+")");
+}
+favbtn.addEventListener("click",function(){apriPreferiti();});
 function apriPreferiti(){
   if(!Account.dentro()){apriLogin(T("Accedi per vedere i tuoi preferiti."));return;}
   apriDialogo("preferiti",'<div id="minebox"></div>',true);
@@ -2077,7 +2097,7 @@ function renderMine(){
   var h='<div class="sech" style="margin-bottom:14px"><h2>'+T("I MIEI GIOCHI")+'</h2>'+
     '<span class="tag sech-end">'+lista.length+(lista.length===1?T(" titolo"):T(" titoli"))+'</span></div>';
   if(!lista.length){
-    h+='<div class="empty" style="padding:16px 0">'+T("Non hai ancora preferiti. Tocca la campanella accanto a un gioco per aggiungerlo: lo ritrovi qui, con la data aggiornata ogni notte.")+'</div>';
+    h+='<div class="empty" style="padding:16px 18px">'+T("Non hai ancora preferiti. Tocca la campanella accanto a un gioco per aggiungerlo: lo ritrovi qui, con la data aggiornata ogni notte.")+'</div>';
   }else{
     h+='<div class="mine">'+lista.map(function(g){
       var quando=g.date?giornoLungo(g.date):TV(g.vague)||"TBA";
@@ -2261,6 +2281,7 @@ var Account=(function(){
 
   var ICO_UTENTE='<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8.5" r="4"/><path d="M4 20c1.5-3.8 4.6-5.5 8-5.5s6.5 1.7 8 5.5"/></svg>';
   function disegnaBottone(){
+    if(typeof disegnaFav==="function")disegnaFav();
     if(!attivo){acbtn.hidden=true;return;}
     acbtn.hidden=false;
     if(sess){
@@ -2353,6 +2374,12 @@ var Account=(function(){
     });
   }
 
+  /* Accesso o uscita fatti in un'altra scheda del sito: questa si allinea. */
+  window.addEventListener("storage",function(e){
+    if(e.key!=="playrain-sess")return;
+    try{sess=JSON.parse(e.newValue||"null");}catch(x){sess=null;}
+    if(sess)carica();else{utente=null;prefs=null;calTok=null;SEGUITI={};aggiornaCampanelle();renderMine();disegnaBottone();if(vistaAperta==="preferiti")chiudiDialogo();}
+  });
   return{attivo:attivo,carica:carica,segui:segui,daLink:daLink,disiscrivi:disiscrivi,
     dentro:function(){return !!sess;},disegnaBottone:disegnaBottone,disegnaMenu:disegnaMenu,
     apriLogin:apriLogin,caricaCalendario:caricaCalendario,disegnaCalendario:disegnaCalendario};
