@@ -20,8 +20,7 @@ altro disegno, non lo stesso coi colori girati, quindi la pagina dichiara
 resto, monospaziati così restano incolonnati. Nasce da un limite misurato: nella veste
 precedente il giallo di "oggi" e il viola degli altri giorni hanno **1,13** di rapporto
 di luminanza fra loro, quindi chi ha una discromatopsia non li separava. Con un segno il
-colore diventa rinforzo e non unico canale. Le bozze da cui è uscita questa direzione
-stanno in `bozze/`.
+colore diventa rinforzo e non unico canale.
 
 ```
 index.html      la pagina: calendario, pannello giorno, classifiche, top 50 ever,

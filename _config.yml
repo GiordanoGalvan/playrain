@@ -1,0 +1,13 @@
+# GitHub Pages: il sito pubblica solo le pagine e i dati che servono.
+# Codice, script e documentazione restano nel repository ma non su playrain.it.
+exclude:
+  - README.md
+  - package.json
+  - package-lock.json
+  - node_modules
+  - scripts
+  - supabase
+  - cambi.json
+  - avvisi.json
+  - PROMEMORIA.md
+  - bozze

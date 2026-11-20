@@ -1,2 +1,5 @@
 node_modules/
 .DS_Store
+# Appunti e prove: restano sul computer, non vanno su GitHub (repository pubblico)
+PROMEMORIA.md
+bozze/
