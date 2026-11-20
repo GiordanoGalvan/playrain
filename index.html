@@ -618,6 +618,7 @@ a.gcard:hover{background:var(--surf2);border-color:var(--line3)}
 .mine{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:0 28px}
 .mrow{display:grid;grid-template-columns:32px minmax(0,1fr) auto;gap:10px;align-items:center;padding:7px 0;border-bottom:1px solid var(--line)}
 .mrow .cov{width:32px}.mrow.past{opacity:.6}
+.mrow .ot{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .mrow .ometa a{color:var(--ink2);text-decoration:underline;text-decoration-color:var(--line3);text-underline-offset:2px}
 .acct{margin-top:22px;padding:16px;border:1px solid var(--line2);max-width:640px}
 .acct-row{display:flex;gap:8px;flex-wrap:wrap}.acct-row .qin{flex:1 1 220px;width:auto;max-width:none}
@@ -2103,7 +2104,7 @@ function renderMine(){
       var quando=g.date?giornoLungo(g.date):TV(g.vague)||"TBA";
       var passato=g.date&&g.date<TODAY;
       return'<div class="mrow'+(passato?" past":"")+'">'+covImg(g,32,43,"t_cover_small")+
-        '<span style="min-width:0"><span class="ot">'+esc(g.t)+'</span><span class="ometa">'+
+        '<span style="min-width:0"><span class="ot" title="'+esc(g.t)+'">'+esc(g.t)+'</span><span class="ometa">'+
         (g.date?'<a href="#d='+g.date+'" data-chiudi>'+esc(quando)+'</a>':esc(quando))+(g.was?' · ↺':'')+'</span></span>'+
         bellBtn(g)+'</div>';
     }).join("")+'</div>';
