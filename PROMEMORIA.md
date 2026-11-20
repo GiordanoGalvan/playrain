@@ -14,6 +14,34 @@
 - Privacy aggiornata (calendario personale, memoria del browser).
 
 ### Da fare / aperto
+
+**Prossima sessione — limite di 300 mail/giorno di Brevo (login + avvisi insieme).**
+Il codice di accesso parte solo al primo accesso, da un dispositivo nuovo o dopo
+"Esci"; gli avvisi sono al massimo 1 mail per persona al giorno. Rischio vero: il
+picco di iscrizioni dopo un video (oltre 300 i codici non partono) e i bot che
+martellano il modulo. Piano proposto (in attesa del si'):
+1. Accedi con Google, Discord e Twitch (zero mail; gratis su Supabase; l'utente
+   crea le app sui tre siti e incolla le chiavi; aggiornare l'informativa).
+2. Anti-bot Cloudflare Turnstile sul modulo di accesso (gratis, supportato da Supabase).
+3. Solo se serve: mail del login su un secondo servizio gratuito (Mailjet 200/giorno
+   o Resend 100/giorno), Brevo resta per gli avvisi.
+4. notify.mjs a scaglioni: oltre la quota partono prima le uscite, il resto il giorno dopo.
+5. Se il sito cresce: Brevo Starter, da 9 $/mese per 5.000 mail, senza limite giornaliero.
+
+**Prossima sessione — statistiche e andamento del sito.**
+- Accessi e iscritti: `supabase/statistiche.sql` (solo conteggi, ultimi 14 giorni +
+  totali) da incollare in Supabase -> SQL Editor. Provata su database di prova, da
+  verificare sui dati veri (se "accessi" resta a 0 il registro audit e' spento:
+  vedere Authentication -> Users, "Last sign in").
+- Mail spedite: Brevo -> Transazionali -> Statistiche / Log.
+- Visite: oggi nessun dato (GitHub Pages non ne da'). Proposti:
+  - Cloudflare Web Analytics (gratis, senza cookie, niente banner; riga
+    nell'informativa e CSP da aggiornare; serve l'account Cloudflare dell'utente);
+  - Google Search Console (record DNS TXT su register.it).
+- Cosa guardare: visite/giorno e provenienza, visitatori che si iscrivono,
+  campanelle per utente, mail usate rispetto a 300, mail respinte su Brevo.
+
+**Altro aperto:**
 - Provare "Aggiungi a Google Calendar" dal proprio account Google e controllare
   che gli eventi compaiano (Google aggiorna ogni qualche ora).
 - Mail agli youtuber (bozze gia' pronte nella chat precedente).
