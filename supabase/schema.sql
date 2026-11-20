@@ -180,6 +180,9 @@ create table if not exists public.games (
 );
 alter table public.games enable row level security;
 revoke all on public.games from anon, authenticated;
+-- La chiave di servizio deve poterci scrivere: nei progetti nuovi Supabase non
+-- lo concede piu' da solo.
+grant select, insert, update, delete on public.games to service_role;
 
 create or replace function public.calendario_utente(t uuid)
 returns table (igdb integer, titolo text, data date, piattaforme text, lang text)
