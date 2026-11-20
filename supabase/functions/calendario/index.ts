@@ -11,7 +11,9 @@
 // pubblica del progetto, che Supabase mette a disposizione della funzione.
 
 const URL_BASE = Deno.env.get("SUPABASE_URL")!;
-const KEY = Deno.env.get("SUPABASE_ANON_KEY")!;
+// Chiave pubblica del progetto (publishable): e' la stessa scritta nella pagina
+// del sito. Se Supabase mette a disposizione la vecchia chiave anon, va bene uguale.
+const KEY = Deno.env.get("SUPABASE_ANON_KEY") || "sb_publishable_apMAdgmRhB_udZ218QMLtw_HgPQK8s9";
 const SITO = "https://playrain.it/";
 const PIATT: Record<string, string> = { pc: "PC", switch2: "Switch 2", ps5: "PS5", xbox: "Xbox" };
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
@@ -76,7 +78,11 @@ Deno.serve(async (req) => {
   if (!UUID.test(t)) return new Response("Indirizzo del calendario non valido.\n", { status: 404 });
   const r = await fetch(URL_BASE + "/rest/v1/rpc/calendario_utente", {
     method: "POST",
-    headers: { apikey: KEY, Authorization: "Bearer " + KEY, "Content-Type": "application/json" },
+    // Le chiavi nuove (sb_...) vanno solo in "apikey"; la vecchia anon e' un JWT
+    // e si puo' mandare anche come Authorization.
+    headers: KEY.startsWith("sb_")
+      ? { apikey: KEY, "Content-Type": "application/json" }
+      : { apikey: KEY, Authorization: "Bearer " + KEY, "Content-Type": "application/json" },
     body: JSON.stringify({ t }),
   });
   if (!r.ok) return new Response("Calendario non disponibile, riprova piu' tardi.\n", { status: 503 });
