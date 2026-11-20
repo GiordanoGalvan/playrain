@@ -1,5 +1,31 @@
 # Playrain — promemoria per la prossima sessione
 
+## Stato al 20 novembre 2026, mattina: punti 1-4 sotto FATTI e online
+
+- Login in alto a destra; dopo l'accesso: pulsante **🔔 Preferiti** (con il numero
+  dei giochi) + nome utente (parte prima della @) con menu
+  (Preferiti, avvisi mail, Scarica dati, Cancella account, Esci).
+- "I miei giochi" e' una finestra separata (`#preferiti`), tolta dalla home.
+- Calendario personale attivo e verificato con l'account reale (16 giochi = 16
+  eventi): tabella `games` caricata ogni notte, Edge Function `calendario`,
+  pulsanti Google / iPhone-Mac / Copia indirizzo / Rigenera.
+- Campanella senza login: chiede di accedere, nessun salvataggio locale; all'uscita
+  i preferiti spariscono dal browser. Le schede aperte si allineano da sole.
+- Privacy aggiornata (calendario personale, memoria del browser).
+
+### Da fare / aperto
+- Provare "Aggiungi a Google Calendar" dal proprio account Google e controllare
+  che gli eventi compaiano (Google aggiorna ogni qualche ora).
+- Mail agli youtuber (bozze gia' pronte nella chat precedente).
+- IGDB: se il sito viene monetizzato, chiedere l'uso commerciale (partner@igdb.com).
+- Contenuti espliciti per maggiorenni: rimandato (verifica eta' AGCOM).
+- Dominio playrain.it: rinnovo manuale, scadenza 19/11/2027 (muoversi a ottobre 2027).
+- Brevo gratuito: 300 mail al giorno; se gli utenti crescono, valutare il piano.
+
+---
+
+## Piano originale (archivio)
+
 Scritto il 20 novembre 2026. Stato: sito online su https://playrain.it, login attivo
 (Supabase UE + Brevo), campanella, avvisi via mail, link diretti, liste da copiare,
 calendario delle uscite piu' attese, pagina privacy.
